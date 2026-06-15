@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GIF-TECH's WORKS 全業務 AI自動化 パイロット ハンドブック</title>
+<style>
+  :root{--ink:#1f2430;--sub:#5b6572;--line:#e7ebef;--bg:#f4f7f6;--green:#0f9d77;--greendk:#0c7a5e;
+    --greenbg:#e8f6f1;--soft:#f0f4f3;--gold:#c98a16;--goldbg:#fff8ec;--goldln:#f3e2bf;--navy:#0f2a23;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;color:var(--ink);
+    background:var(--bg);line-height:1.8;-webkit-font-smoothing:antialiased;padding:26px 14px 60px}
+  .wrap{max-width:940px;margin:0 auto}
+  .head{background:linear-gradient(135deg,#0f9d77,#0c8466);color:#fff;padding:28px 32px;border-radius:18px 18px 0 0}
+  .head .small{font-size:12px;letter-spacing:.14em;color:#cdeada;font-weight:700}
+  .head h1{font-size:24px;font-weight:800;margin:8px 0 0;line-height:1.45}
+  .head .meta{font-size:12.5px;color:#dcf3ea;margin-top:10px}
+  .amp{background:var(--greenbg);border:1px solid #cdeadf;border-left:5px solid var(--green);padding:16px 20px;font-size:14px;color:#135a48}
+  .amp b{color:var(--greendk)}
+  .nav{background:#fff;border:1px solid var(--line);border-top:none;padding:14px 20px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .nav a{font-size:12.5px;color:var(--greendk);text-decoration:none;border:1px solid #cfe7df;background:#f3faf7;border-radius:999px;padding:5px 11px;white-space:nowrap}
+  .nav a:hover{background:var(--green);color:#fff;border-color:var(--green)}
+  .nav .btn{cursor:pointer;border:1px solid var(--green);background:var(--green);color:#fff;border-radius:999px;padding:6px 13px;font-size:12.5px;font-weight:700;text-decoration:none}
+  section{background:#fff;border:1px solid var(--line);border-top:none;padding:24px 32px}
+  section.qa{background:#f7fcfa;border-left:4px solid var(--green)}
+  section:last-of-type{border-radius:0 0 18px 18px}
+  .schead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--greenbg);padding-bottom:8px;margin-bottom:6px}
+  .schead h2{font-size:19px;font-weight:800;color:var(--ink)}
+  .vbadge{font-size:11px;font-weight:800;padding:3px 10px;border-radius:6px}
+  .vbadge.vok{background:var(--greenbg);color:var(--greendk)}
+  .vbadge.vwarn{background:var(--goldbg);color:#9a6a0b}
+  h3{font-size:15px;font-weight:800;color:var(--greendk);margin:18px 0 6px}
+  h4{font-size:13.5px;font-weight:800;color:var(--ink);margin:14px 0 4px}
+  p{font-size:14px;margin:7px 0}
+  ul,ol{margin:7px 0 7px 1.3em;font-size:14px} li{margin:4px 0}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}
+  th{background:var(--soft);text-align:left;padding:8px 10px;font-weight:700;color:#3a444f;border:1px solid var(--line);vertical-align:top}
+  td{padding:8px 10px;border:1px solid var(--line);vertical-align:top}
+  .tc{text-align:center;white-space:nowrap}
+  code{background:#eef3f1;border-radius:4px;padding:1px 5px;font-family:ui-monospace,Menlo,monospace;font-size:12.5px}
+  .todo{background:#fff;border:1px dashed #c9b27a;color:#8a6d2e;border-radius:5px;padding:0 5px;font-size:12.5px;font-weight:700;white-space:nowrap}
+  .pblock{margin:12px 0}
+  .phead{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .phead .pn{font-weight:800;font-size:13.5px;color:var(--ink)}
+  .copy{margin-left:auto;cursor:pointer;border:1px solid var(--green);background:#fff;color:var(--greendk);border-radius:8px;padding:5px 13px;font-size:12.5px;font-weight:700}
+  .copy:hover{background:var(--green);color:#fff} .copy.done{background:var(--greendk);color:#fff}
+  pre{background:#0f2a23;color:#eafff7;border-radius:10px;padding:15px 16px;overflow-x:auto;
+    font-family:ui-monospace,Menlo,monospace;font-size:12.5px;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+  .intro{background:#fff;border:1px solid var(--line);border-top:none;padding:24px 32px}
+  .box{border-radius:12px;padding:14px 16px;margin:12px 0;font-size:13.5px}
+  .box.warn{background:var(--goldbg);border:1px solid var(--goldln);border-left:4px solid var(--gold)}
+  .box.warn b{color:#9a6a0b}
+  .note{background:var(--soft);border-left:3px solid #cfe3da;border-radius:0 8px 8px 0;padding:9px 13px;margin:9px 0;font-size:12.5px;color:#4a5560}
+  .note b{color:var(--greendk)}
+  .links a{color:var(--greendk);font-weight:700;text-decoration:none}
+  .foot{color:var(--sub);font-size:12px;padding:22px 32px;background:#fff;border:1px solid var(--line);border-top:none;border-radius:0 0 18px 18px}
+  .foot h4{color:var(--ink);margin:0 0 6px}
+  @media print{body{background:#fff;padding:0}.nav{display:none}section,.head,.foot,.amp,.intro{border-radius:0;border-left:none;border-right:none}
+    pre{white-space:pre-wrap}section,.pblock,table,.box{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div class="small">GIF-TECH's WORKS ／ 全業務 AI自動化 パイロット ハンドブック</div>
+    <h1>8業務＋横断QAを「AIが下準備・人が判断と仕上げ」に<br>落とすパイロット集</h1>
+    <div class="meta">就労継続支援B型事業所の全業務を、来週そのまま試せる形に ／ 作成：RYOSEIWORLD合同会社 ／ 2026-06-15 ／ 各業務は多エージェントで捏造・増幅・安全弁を検証済み</div>
+  </div>
+
+  <div class="amp">
+    AIは皆さんの<b>仕事を取り上げる道具ではありません</b>。退屈で時間のかかる下準備（文字起こし・下書き・収集・現像など）をAIが肩代わりして、<b>一人ひとりがもっと多く・もっと良い仕事をでき、工賃（もらえるお金）を増やす</b>ための道具です。指導員のチェックの負担も軽くなり、もっと多くのご依頼を受けられます。<b>送る・公開する・納品する「最後のボタン」は、必ず人が押します。</b>事実・名前・数字はAIに作らせず、未確認は <span class="todo">[要確認]</span> で空けます。
+  </div>
+
+  <div class="nav">
+      <a href="#video">動画編集</a>
+      <a href="#design">デザイン制作</a>
+      <a href="#sns">SNS運用</a>
+      <a href="#list">リスト入力／営業</a>
+      <a href="#web">WEB制作</a>
+      <a href="#photo">写真（撮影後の現像・レタッチ）</a>
+      <a href="#admin">その他事務（画像補正・切り抜き）</a>
+      <a href="#qa">横断：指導員QAの一次チェック</a>
+      <a class="btn" href="writing-kit.html">ライティング深掘りキット</a>
+      <span class="btn" onclick="window.print()">印刷 / PDF</span>
+  </div>
+
+  <div class="intro">
+    <h3>使い方（共通）</h3>
+    <p>各業務の「ミニキット」は、AIに任せる工程・人が残す仕事・そのまま貼るプロンプト・実測の観点・指導員チェックの要点をまとめた、来週から試せる出発点です。まず<b>1業務×1クライアントで小さく始め</b>、実測してから横に広げます。<b>最優先は「動画の前工程」と「ライティング初稿」</b>（実績量が多く・導入が軽く・ミスしても取り返せる）。</p>
+    <p>ライティングは別ファイルで<b><a class="links" href="writing-kit.html">深掘りキット（手順書・実測シート・指導員チェック一式）</a></b>を用意済み。SNS・営業リストは実物サンプル（このフォルダの <code>サンプル成果物/B・C</code>）も併せて使えます。</p>
+    <div class="box warn"><b>横断インフラ＝指導員QAの一次チェック</b>は、どの業務にも効く土台です（全業務のボトルネックを直撃）。最後のセクションにまとめました。最終承認は必ず人、の二段構えで使います。</div>
+
+    <h3>導入の優先順位（インパクト × 着手しやすさ）</h3>
+    <table>
+      <tr><th class="tc">#</th><th>施策</th><th class="tc">導入工数</th><th class="tc">運用時短</th><th class="tc">取り返し</th><th>狙う効果</th></tr>
+      <tr><td class="tc">01</td><td>動画の前工程自動化（文字起こし→字幕→ショート抽出）</td><td class="tc">1〜2人日</td><td class="tc">30〜50%/本</td><td class="tc">可逆</td><td>最大カテゴリ。月数十本を増産、新規も受けやすく</td></tr><tr><td class="tc">02</td><td>ライティング初稿のパイプライン化（診断→構成→初稿）</td><td class="tc">約1人日</td><td class="tc">60〜70%</td><td class="tc">可逆</td><td>既にChatGPT使用中(#478)。週10〜20投稿を底上げ。<b>深掘りキット完成済</b></td></tr><tr><td class="tc">03</td><td>営業リスト＋フォーム営業文の半自動化</td><td class="tc">2〜3人日</td><td class="tc">70〜80%</td><td class="tc">可逆(送信は人)</td><td>継続2社の定型。退屈な収集を消し量を伸ばす</td></tr><tr><td class="tc">04</td><td>SNS投稿のカレンダー＋文案＋ハッシュタグ</td><td class="tc">約1人日</td><td class="tc">約50%</td><td class="tc">可逆(投稿は人)</td><td>LFU様継続。半自動で月次運用を安定化</td></tr><tr><td class="tc">05</td><td>サムネ/図解のバリエ量産</td><td class="tc">1〜2人日</td><td class="tc">40〜60%</td><td class="tc">可逆</td><td>Canva/Midjourney(既存)で1案→複数展開</td></tr><tr><td class="tc">06</td><td>漫画の画像補正（ゴミ消し）の半自動化</td><td class="tc">3〜5人日(検証込)</td><td class="tc">50〜70%</td><td class="tc">可逆</td><td>月200ページの定型を省力化（要品質検証）</td></tr><tr><td class="tc">07</td><td>WEB制作の叩き台生成（LP/モック）</td><td class="tc">2〜3人日</td><td class="tc">叩き台80%</td><td class="tc">可逆</td><td>初稿は秒。仕上げ・本番は人</td></tr><tr><td class="tc">08</td><td>指導員QAの一次チェック自動化（横断）</td><td class="tc">2〜3人日</td><td class="tc">QA負担減</td><td class="tc">可逆(最終は人)</td><td>全業務のボトルネックを直撃。指導員が最終確認に集中</td></tr>
+    </table>
+    <p style="font-size:12px;color:#8a939c">※工数・時短は概算。本格導入の前に1週間のパイロットで実測する前提。数値・固有名詞はサイト原典どおりで、未確認は記載しない。</p>
+  </div>
+
+<section id="video" class="">
+  <div class="schead"><h2>動画編集</h2><span class="vbadge vok">AI生成→別エージェントで検証・修正済（捏造防止・増幅・安全弁）</span></div>
+  <div class="note">GIF-TECH&#x27;s WORKS の最大カテゴリ（実績20件）に対応する、来週そのまま試せるミニキット。<br>既に使っている Canva・Premiere（どちらも導入済み）と ChatGPT（導入済み）を、<br>「下ごしらえはAI、判断と仕上げは人」の形に固定したもの。<br>ねらいは人を減らすことではありません。文字起こし・粗カット・字幕・ショート候補・サムネ案といった<br>時間のかかる下ごしらえをAIに任せ、利用者は「テンポと構成の判断」「固有名詞の校正」「権利の確認」「最終書き出し」という<br>価値の高い工程に集中する。これで一人あたりの本数と仕事の幅が増え、工賃の原資が増え、指導員のチェック負担も軽くなります。<br><br>※本文の生成例はすべてサンプル（架空のお題）。実案件では預かった元動画を差し込みます。<br>※固有名詞・数字・音源/素材の権利は AIに任せず、必ず人が確認します（捏造防止）。</div>
+<p>---</p>
+<h3>このキットで変わること（数字はすべて確定実績の範囲）</h3>
+<ul><li>▸ 単価：1本 ¥5,500〜11,000</li><li>▸ 代表的なお仕事：村上様（魔界の税理士／月¥10万・月12本＋LIVE＋公式LINE）、高瀬様（月8本）、板橋区（¥715,000の啓発映像）</li><li>▸ 効果の目安：運用時短 30〜50%／本（可逆＝合わなければ元の手順にすぐ戻せます）</li><li>▸ 導入にかかる手間：1〜2人日（最初に手順を1回そろえれば、あとは使い回し）</li><li>▸ ねらい：村上様・高瀬様の月数十本を増産しやすくし、板橋区のような新規も受けやすくする</li></ul>
+<p>---</p>
+<h3>工程（全6ステップ・所要は目安）</h3>
+<table><tr><th>手順</th><th>担当</th><th>所要</th><th>中身</th></tr><tr><td>01 素材と狙いの受領</td><td>利用者</td><td>5〜10分</td><td>元動画・尺・用途（本編／ショート／LIVE切り出し）・納期をヒアリング</td></tr><tr><td>02 文字起こし</td><td>AI</td><td>自動</td><td>Premiere（導入済み）の文字起こし、または（例・要確認：未導入なら無料/有料を確認）Vrew・Whisper</td></tr><tr><td>03 無音・フィラーの自動カット</td><td>AI</td><td>自動</td><td>Premiere（導入済み）、または（例・要確認）CapCut。「えー」「あのー」や長い無音を機械が粗取り</td></tr><tr><td>04 字幕生成</td><td>AI＋利用者</td><td>5〜15分</td><td>自動字幕を出す → ★固有名詞・社名・人名・数字は人が校正</td></tr><tr><td>05 ショート抽出・サムネ案</td><td>AI＋指導員</td><td>10〜20分</td><td>長尺→ショート候補をAIが抽出（例・要確認：Opus Clip）／サムネは Canva・Midjourney・Photoshop（いずれも導入済み）。指導員がテンポ・構成を確認</td></tr><tr><td>06 仕上げ・権利確認・最終書き出し</td><td>利用者＋指導員</td><td>20〜40分</td><td>★ここが人の仕事。テンポと構成の最終判断・権利確認・書き出し・最終GO</td></tr></table>
+<p><b>従来の手作業に対し、1本あたり 約30〜50% の時短（確定実績の範囲）。空いた時間は本数増と品質確認に回します。</b></p>
+<div class="note">フィラー（filler）＝「えー」「あのー」など意味のない口ぐせ。<br>ショート＝縦型の短い動画（YouTubeショート・リール等）のこと。</div>
+<p>---</p>
+<h3>プロンプト（ChatGPT は導入済み。コピーして使えます）</h3>
+<h4>プロンプト1：カット候補の洗い出し</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_video_1',this)">コピー</span></div><pre id="p_video_1">あなたは動画編集アシスタントです。次の文字起こしを読み、
+(1)「えー/あのー」などのフィラー、(2)言い間違いの言い直し、(3)長い無音や脱線
+の3種類について、削ってよさそうな箇所を【タイムコード＋理由】で一覧にしてください。
+・残すか消すかの最終判断は人がします。あなたは候補出しだけ。
+・話の意味が変わる削りは「要注意」と印を付けること。
+【文字起こし】&lt;ここに貼る&gt;</pre></div>
+<h4>プロンプト2：長尺からショート候補を抜き出す</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_video_2',this)">コピー</span></div><pre id="p_video_2">次の文字起こしから、縦型ショート（30〜60秒）に向く見せ場を3つ選んでください。
+・各候補に「開始〜終了のタイムコード」「最初の1秒で言うフック（1行）」を付ける
+・専門用語が出る場合は短い補足を添える
+・どれを採用するかは人とテンポを相談して決めます
+【文字起こし】&lt;ここに貼る&gt;</pre></div>
+<h4>プロンプト3：字幕テキストの整え</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_video_3',this)">コピー</span></div><pre id="p_video_3">次の自動字幕を、読みやすい話し言葉に整えてください。
+・意味は変えない。1行は短めに区切る
+・社名・人名・商品名・数字・日付は自信があっても書き換えず [要確認] と残す（人が直します）
+【自動字幕】&lt;ここに貼る&gt;</pre></div>
+<h4>プロンプト4：サムネ文言＆素材の案（Canva/Midjourney/Photoshop=導入済み）</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_video_4',this)">コピー</span></div><pre id="p_video_4">この動画のサムネ用に、(A)短いキャッチ文を3案、(B)Midjourney用の画像イメージ文を3案 出してください。
+・誇張・断定（「絶対」「日本一」等）は使わない
+・実在の人物名・社名・受賞歴などは [要確認] にして勝手に入れない
+【動画のテーマ】&lt;ここに貼る&gt;</pre></div>
+<p>---</p>
+<h3>生成サンプル（お題：「確定申告のよくある質問3つ」※架空）</h3>
+<h4>ショート候補（プロンプト2の出力例）</h4>
+<ul><li>候補① 00:42〜01:35 フック：「医療費控除、レシート捨ててませんか？」</li><li>候補② 03:10〜03:58 フック：「ふるさと納税、ワンストップの落とし穴」</li><li>候補③ 07:05〜07:50 フック：「経費にできる・できないの線引き」</li></ul>
+<h4>字幕の整え（プロンプト3の出力例）</h4>
+<div class="note">今日は、確定申告で<span class="todo">[要確認：制度名や数字]</span>についてよく聞かれる質問を3つ紹介します。<br>まず1つめ。レシートは、申告が終わるまで取っておいてください。<br>（※「<span class="todo">[要確認]</span>」は人が事実で埋めてから公開します）</div>
+<p>---</p>
+<h3>★人がやる仕上げチェックリスト（ここを省かないでください）</h3>
+<ul><li>☐ テンポと構成は意図どおりか（機械の粗取りで「間」が消えすぎていないか）</li><li>☐ 固有名詞・社名・人名・数字・日付の校正（字幕とサムネの <span class="todo">[要確認]</span> を残していないか）</li><li>☐ 音源・BGM・効果音の商用利用可否を確認 <span class="todo">[要確認：使用する音源サービスの規約・商用可否]</span></li><li>☐ 映像・画像素材の権利と、出演者の許諾を確認</li><li>☐ 個人情報・映り込み（関係ない人・書類・画面・住所など）を確認</li><li>☐ 最終書き出し設定（解像度・尺・縦横）を確認</li><li>☐ 公開／納品の最終GO は 担当者＋指導員 で確認 → 送信ボタンは人が押す</li></ul>
+<p>---</p>
+<h3>つまずいたときは</h3>
+<ul><li>▸ 文字起こしが崩れる → 元の音が小さい／雑音が原因。音量を上げる、または短く区切って入れ直す。</li><li>▸ 自動カットで必要な「間」まで消えた → カットを弱める設定にする／消えた所だけ手で戻す（可逆です）。</li><li>▸ 字幕の社名・人名が違う → AIは推測で書きます。必ず人が直す。<span class="todo">[要確認]</span> のまま公開しない。</li><li>▸ ショート候補がしっくりこない → 候補を3つ出させて、指導員とテンポを相談して選ぶ。</li><li>▸ クライアントの素材を外部ツールに上げてよいか不安 → 上げる前に指導員に相談 <span class="todo">[要確認：クライアントとの取り決め]</span>。</li></ul>
+<p>---</p>
+<h3>安全弁（必ず守ること）</h3>
+<ul><li>▸ 送信・公開・入稿・納品の最終GOは必ず人（担当者＋指導員）。AIは下書き・下ごしらえまで。</li><li>▸ 権利：音源・BGM・効果音・映像・画像の商用利用可否、出演者の許諾を人が確認 <span class="todo">[要確認：各素材ソースの規約]</span>。</li><li>▸ 個人情報：関係ない人物・書類・画面の映り込みを人がチェック。</li><li>▸ ツール規約：各AIツールのアップロード／商用利用ポリシーを確認。クライアント素材の外部アップロード可否は事前確認。</li><li>▸ ツールの区別：</li><li>導入済み＝Canva／Premiere／ChatGPT／Midjourney／Photoshop（事業所導入の17種に含む）。</li><li>未導入の候補＝Vrew／Whisper／CapCut／Opus Clip（例・要確認：未導入なら無料/有料を確認）。導入済みとして扱わない。</li></ul>
+<p>---</p>
+<h3>このキットは「増幅」のための道具です</h3>
+<ul><li>▸ 人を減らす仕組みではありません。下ごしらえ（文字起こし・粗カット・字幕・ショート候補・サムネ案）をAIが担うことで、利用者は「判断と仕上げ」に集中できます。</li><li>▸ 1本あたり30〜50%の時短を、本数増（村上様 月12本＋LIVE＋公式LINE／高瀬様 月8本 の増産、板橋区¥715,000のような新規受注）と品質確認に回します。</li><li>▸ 1本 ¥5,500〜11,000 の仕事が回しやすくなり、一人あたりの工賃の原資と、できる仕事の幅が広がります。</li><li>▸ 指導員7名のチェック負担も、<span class="todo">[要確認]</span>の明示と仕上げチェックリストで軽くなります。</li><li>▸ 導入工数は1〜2人日。可逆なので、合わなければ元の手順にすぐ戻せます。まずは1本、来週試してみてください。</li></ul>
+</section>
+<section id="design" class="">
+  <div class="schead"><h2>デザイン制作</h2><span class="vbadge vok">AI生成→別エージェントで検証・修正済（捏造防止・増幅・安全弁）</span></div>
+  <p>（サムネ／図解のバリエ量産 ＝ 1案を「色違い・サイズ違い」に高速展開 ／ 村上様 サムネ週3 想定）</p>
+<p>来週から「1業務 × 1クライアント」で試すための、手順書・プロンプト・実測シート・指導員チェック一式。</p>
+<p>作成：RYOSEIWORLD合同会社 ／ 2026-06-15</p>
+<p>---</p>
+<h3>はじめに（このキットの約束）</h3>
+<p>AIは、働く皆さんの仕事を取り上げる道具ではありません。ラフ案づくり・素材集め・サイズ違いの量産といった面倒な下準備をAIが肩代わりして、一人ひとりが <b>もっと多く・もっと良いデザインを仕上げ、工賃（もらえるお金）を増やす</b> ための道具です。指導員のチェックの負担も軽くなります。</p>
+<p>守ること（3つ・ここは外さない）</p>
+<ul><li>人の仕事 ▸ 送る・入稿する・納品する「最後のボタン」は、必ず人が押します。</li><li>人の仕事 ▸ ブランドに合うか／文字が読めるか／その画像を仕事に使ってよいか（商用利用権）を最後に決めるのは人です。</li><li>▸ 事実・名前・数字・ロゴ・他人の写真は、AIにも自分にも作らせません。分からないものは <code><span class="todo">[要確認：…]</span></code> と書いて空けたまま、指導員に渡します。</li></ul>
+<p>このキットの中で <code><span class="todo">[要確認：…]</span></code> と書いた所は、現場の事実を入れる空欄です。</p>
+<p>---</p>
+<h3>A 開始前 事前準備チェック（指導員用）</h3>
+<p>下が全部そろうまで、パイロットは始めません。ここを埋めるのが指導員の最初の仕事（半日〜1日くらい）。埋まれば、利用者は手順書どおりに回せます。</p>
+<h4>01 人と連絡</h4>
+<table><tr><th>項目</th><th>記入欄</th></tr><tr><td>担当指導員の名前（つまずいた時の連絡先）</td><td><code><span class="todo">[要確認：担当指導員名]</span></code></td></tr><tr><td>連絡の手段（チャットのツール名など）</td><td><code><span class="todo">[要確認：連絡手段]</span></code></td></tr></table>
+<h4>02 使う道具（すべて導入済みのものから始める）</h4>
+<table><tr><th>項目</th><th>記入欄</th></tr><tr><td>画像のラフ・素材を作るAI ＝ <b>Midjourney（導入済み）</b>。ログイン情報・共有か個別か</td><td><code><span class="todo">[要確認：Midjourneyのログイン情報]</span></code></td></tr><tr><td>仕上げ・文字載せ・サイズ展開 ＝ <b>Canva（導入済み）</b>。ログイン情報</td><td><code><span class="todo">[要確認：Canvaのログイン情報]</span></code></td></tr><tr><td>細かい最終調整 ＝ <b>Photoshop（導入済み）</b>（使う場合のみ）</td><td><code><span class="todo">[要確認：Photoshop利用の有無]</span></code></td></tr><tr><td>図解の文章・構成の下書き ＝ <b>ChatGPT（導入済み）</b>（使う場合のみ）。ログイン情報・モデル名</td><td><code><span class="todo">[要確認：ChatGPTのログイン情報]</span></code></td></tr><tr><td>（任意）Adobe Firefly・Recraft（例・要確認：<b>未導入なら無料/有料を確認してから</b>。導入済みではありません）</td><td><code><span class="todo">[要確認：Firefly/Recraft 導入の有無]</span></code></td></tr><tr><td>このキット（プロンプト・チェック表）の置き場所</td><td><code><span class="todo">[要確認：配布場所/ファイル名]</span></code></td></tr></table>
+<h4>03 クライアント（村上様）の中身</h4>
+<table><tr><th>項目</th><th>記入欄</th></tr><tr><td>ブランドガイド（使う色・フォント・ロゴの正しいデータ・余白ルール）</td><td><code><span class="todo">[要確認：村上様のブランドガイド]</span></code></td></tr><tr><td>サムネに必ず入れる要素・禁止事項（NG表現・使ってよい/だめな画像）</td><td><code><span class="todo">[要確認：必須要素・NG]</span></code></td></tr><tr><td>想定する見る人（どんな視聴者向けか）</td><td><code><span class="todo">[要確認：想定視聴者]</span></code></td></tr><tr><td>サムネに載せる文言・数字（タイトル文など。<b>こちらが渡したものだけ使う</b>）</td><td><code><span class="todo">[要確認：載せる文言・数字]</span></code></td></tr><tr><td>承認済みの <b>完成見本を1点</b>（利用者が「これができればOK」と分かる）</td><td><code><span class="todo">[要確認：完成見本のありか]</span></code></td></tr><tr><td>ロゴ・商品名・人名・地名など固有名詞の <b>正しい表記の一覧</b></td><td><code><span class="todo">[要確認：正しい表記の一覧]</span></code></td></tr><tr><td>図解に入れる数字・社名の <b>確認先</b>（おおもとの公式情報）</td><td><code><span class="todo">[要確認：一次情報の確認先]</span></code></td></tr><tr><td>納品先と納品の形（サイズ・ファイル形式・渡し方）</td><td><code><span class="todo">[要確認：納品先・形式]</span></code></td></tr></table>
+<h4>04 権利・コンプラの確認（ここは始める前に必ず）</h4>
+<table><tr><th>項目</th><th>記入欄</th></tr><tr><td>Midjourney・Canva など各ツールの <b>商用利用の条件・契約プラン</b>（仕事に使ってよい範囲）</td><td><code><span class="todo">[要確認：各ツールの商用利用条件・プラン]</span></code></td></tr><tr><td>使うフォント・素材・テンプレートの <b>ライセンス</b>（商用OKか）</td><td><code><span class="todo">[要確認：フォント・素材ライセンス]</span></code></td></tr><tr><td>実在の人物の写真を使う場合の <b>本人の許可（肖像権）</b> の有無</td><td><code><span class="todo">[要確認：肖像権・利用許可]</span></code></td></tr><tr><td>実在のロゴ・商標を扱う場合の <b>元データと使用許可</b></td><td><code><span class="todo">[要確認：ロゴ・商標の許可]</span></code></td></tr><tr><td>迷ったときの確認先（クライアント窓口か社内の責任者か）</td><td><code><span class="todo">[要確認：権利の確認先]</span></code></td></tr></table>
+<h4>05 測る基準（実測シート用）</h4>
+<table><tr><th>項目</th><th>記入欄</th></tr><tr><td>従来見込（AIを使わず作っていた頃の、同じくらいの難しさの所要分。直近実績の平均か数件だけ実測）</td><td><code><span class="todo">[要確認：従来見込の基準]</span></code></td></tr><tr><td>品質の合格ライン（既定の案：品質4項目がどれも3点以上）。下げたい/上げたい時だけ変える</td><td><code><span class="todo">[要確認：合格ライン（既定=各項目3以上）]</span></code></td></tr></table>
+<p>参考（確定している数字）</p>
+<ul><li>単価のめやす ▸ サムネ ¥1,650〜 ／ 図解 ¥1,650〜5,500 ／ チラシ ¥5,500〜11,000</li><li>導入の手間 ▸ 1〜2人日　|　時短のめやす ▸ 40〜60%　|　元に戻せる（可逆）</li><li>狙い ▸ 1案 → 複数展開（色違い・サイズ違い）を高速化</li></ul>
+<p>---</p>
+<h3>B 1ページ手順書（全6ステップ・利用者用）</h3>
+<h4>これができあがります（完成のイメージ）</h4>
+<ul><li>できあがるもの ＝ AIが手伝ったラフ案を、人が「ブランド・文字の読みやすさ・使ってよい画像か」まで直した、<b>納品前の下書きデザイン</b>。</li><li>はじめに、指導員から完成見本を1点もらってから始める <code><span class="todo">[要確認：完成見本のありか]</span></code>。</li></ul>
+<h4>始める前の3点チェック（3つそろってから始める）</h4>
+<ul><li>☐ ブランドガイド（色・フォント・ロゴ）<code><span class="todo">[要確認]</span></code></li><li>☐ 載せる文言・数字（こちらが渡したもの）<code><span class="todo">[要確認]</span></code></li><li>☐ 完成見本1点 <code><span class="todo">[要確認]</span></code></li></ul>
+<p>1つでも見あたらない時は → このページの上に戻り、担当指導員 <code><span class="todo">[要確認：担当指導員名]</span></code> さんに「準備チェックの○○が見あたりません」と送る。</p>
+<h4>手順（縦に1ステップずつ。終わったら ☐ にチェック）</h4>
+<p><b>01 道具と材料をそろえる</b></p>
+<ul><li>☐ Midjourney と Canva を開く <code><span class="todo">[要確認：ログイン情報]</span></code>。</li><li>☐ ブランドガイド・載せる文言・完成見本が手元にあるか見る。</li><li>うまくいかない時 → 「始める前の3点チェック」に戻り、指導員に「手順01の○○が見あたりません」と送る。</li></ul>
+<p><b>02 ラフ案・素材をAIで作る</b></p>
+<ul><li>☐ 下の「C ① ラフ案プロンプト」を Midjourney に貼って、案を数パターン出す。</li><li>☐ 実在のロゴ・商標・実在の人物の顔は作らない。必要なら <code><span class="todo">[要確認]</span></code> にして指導員に渡す。</li><li>うまくいかない時 → 思った絵が出なければ、言葉を1つだけ変えてもう一度。3回試してダメなら指導員に相談。</li></ul>
+<p><b>03 図解の文章・構成を下書きする（図解のときだけ）</b></p>
+<ul><li>☐ 「C ② 図解の下書きプロンプト」を ChatGPT に貼る。</li><li>☐ 数字・社名・固有名詞は、渡されたものだけ。無いものは AIに作らせず <code><span class="todo">[要確認]</span></code> と書く。</li></ul>
+<p><b>04 Canvaで仕上げ・文字載せ・バリエ展開</b></p>
+<ul><li>☐ ラフ案を Canva に持ち込み、<b>文字（日本語）はCanvaで人が載せる</b>（AIの画像生成に文字は頼らない＝読みやすさを守るため）。</li><li>☐ ブランドの色・フォントに合わせる。</li><li>☐ 色違い・サイズ違い（媒体別リサイズ）を展開する <code><span class="todo">[要確認：必要なサイズ一覧]</span></code>。</li></ul>
+<p><b>05a ★ 人がチェック（事実・権利）</b></p>
+<ul><li>☐ 文言・数字・社名・固有名詞が正しいか、おおもとの情報で1つずつ確かめる <code><span class="todo">[要確認：確認先]</span></code>。</li><li>☐ 使った画像・フォント・素材が <b>仕事に使ってよいもの（商用利用OK）</b> か確かめる <code><span class="todo">[要確認：商用利用条件]</span></code>。</li><li>☐ 確かめられない所は、自分で決めず <code><span class="todo">[要確認]</span></code> と書いて空ける。最終確認と責任は指導員が持ちます。</li></ul>
+<p><b>05b ★ 人がチェック（見た目・読みやすさ）</b></p>
+<ul><li>☐ ブランドに合っているか。小さく表示しても <b>文字が読めるか</b>。</li><li>☐ 直しが必要なら 04 に戻ってやり直す。</li></ul>
+<p><b>06 ★ 指導員に渡す（納品の最後のGOは人）</b></p>
+<ul><li>☐ できた下書きを指導員に見てもらう（指導員チェックへ）。</li><li>☐ <code><span class="todo">[要確認]</span></code> が1つでも残っていたら納品・入稿しない。指導員に「<span class="todo">[要確認]</span>が残っています」と伝える。</li></ul>
+<p>★ ＝ ここは人の仕事（AIに任せない所）。05a・05b（事実・権利・見た目）と 06（納品の最後のGO）は、人が最後まで責任を持ちます。</p>
+<p>困ったときの連絡先：担当指導員 <code><span class="todo">[要確認：担当指導員名]</span></code>（<code><span class="todo">[要確認：連絡手段]</span></code>）。止まったステップ番号を添えて送ってください。</p>
+<p>---</p>
+<h3>C そのまま貼るプロンプト（利用者用）</h3>
+<p>枠の中の 【 】 は差し込み欄。【 】ごと消して、自分の言葉や渡された材料に置きかえます。あなたが使うのは ①〜③ だけです（指導員のチェックは D）。</p>
+<h4>① ラフ案プロンプト（Midjourney に貼る）</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_design_1',this)">コピー</span></div><pre id="p_design_1">【作りたいもの：例 YouTubeサムネの背景イメージ】のラフ案を作ってください。
+・雰囲気／テイスト：【要確認：例 明るく親しみやすい】
+・色の方向：【要確認：ブランドの色】
+・構図：【要確認：例 人物は右、左に文字スペースを空ける】
+守ること：
+・実在のロゴ・商標・実在の人物の顔は作らない
+・日本語の文字は入れない（文字は後でCanvaで人が載せます）
+・複数パターン（色違い・構図違い）を出す</pre></div>
+<h4>② 図解の下書きプロンプト（ChatGPT に貼る）</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_design_2',this)">コピー</span></div><pre id="p_design_2">次のテーマで「図解の構成案（見出し・箱の中の短い文）」の下書きを作ってください。
+・テーマ：【ここに渡された内容を貼る】
+・見る人：【要確認：想定視聴者】
+守ること：
+01 私が渡していない数字・社名・人名・制度名・URLは書かない。必要な所は [要確認] と書いて空ける
+02 推測で事実を作らない。分からないことは [要確認] のまま残す
+03 入れた [要確認] は、最後に「要確認リスト」として一覧でまとめる</pre></div>
+<h4>③ バリエ展開メモ（Canvaで人が操作する時の指示書きとして使う）</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_design_3',this)">コピー</span></div><pre id="p_design_3">このデザインを次の形に展開します（Canvaで人が作業）。
+・色違い：【要確認：必要な色】
+・サイズ違い（媒体別）：【要確認：例 YouTubeサムネ／Instagram正方形／X横長】
+確認：各サイズで文字が切れず読めるか／ブランドの色・フォントになっているか</pre></div>
+<p>コツ：<code><span class="todo">[要確認]</span></code> が出たら、その名前や数字をAIに作らせない。空けたまま指導員に渡す。</p>
+<p>---</p>
+<h3>D 指導員チェック（納品前の最終確認・指導員用）</h3>
+<p>下が全部 ✓ になって、はじめて納品・入稿してよい。最後のGOは指導員です。</p>
+<ul><li>☐ 事実 ▸ 文言・数字・社名・固有名詞が、おおもとの情報と一致している（<code><span class="todo">[要確認]</span></code> が残っていない）</li><li>☐ 権利 ▸ 使った画像・フォント・素材・テンプレートが商用利用OK <code><span class="todo">[要確認：商用利用条件]</span></code></li><li>☐ 権利 ▸ 実在の人物写真は本人の許可あり／実在ロゴ・商標は許可あり、または使っていない</li><li>☐ 個人情報 ▸ 実在の人が特定できる情報（顔・名前・連絡先など）が、許可なく入っていない</li><li>☐ ブランド ▸ 色・フォント・ロゴがガイド通り</li><li>☐ 読みやすさ ▸ 小さく表示しても文字が読める</li><li>☐ 形式 ▸ 納品先の指定サイズ・ファイル形式になっている <code><span class="todo">[要確認：納品先・形式]</span></code></li><li>☐ 最後のGO ▸ 指導員が確認し、納品・入稿・公開のボタンを人が押す</li></ul>
+<p>---</p>
+<h3>E 実測シート（1案ごとに1行・後で時短を計算する）</h3>
+<table><tr><th>日付</th><th>案件</th><th>種別(サムネ/図解/チラシ)</th><th>従来見込(分)</th><th>AI使用の実時間(分)</th><th>展開数(色/サイズ)</th><th>品質(各3以上か)</th><th>残った<span class="todo">[要確認]</span>数</th><th>指導員GO日</th></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table>
+<ul><li>時短(%) ＝ (従来見込 − 実時間) ÷ 従来見込 × 100。めやすは 40〜60%。</li><li>数字が出そろったら、村上様（サムネ週3）など定期案件で「1案→複数展開」の効果を見ます。</li></ul>
+<p>---</p>
+<h3>F このパイロットの位置づけ（増幅の確認）</h3>
+<ul><li>目的は人を減らすことではありません。AIが下準備（ラフ・素材・サイズ展開）を肩代わりし、<b>作れる本数と幅を増やして工賃を上げ、指導員のチェック負担を軽くする</b> ことが目的です。</li><li>導入の手間 1〜2人日／時短 40〜60%／元に戻せる（可逆）。うまくいかなければ、いつでも元のやり方に戻せます。</li><li>美的判断・文字の読みやすさ・商用利用権の確認・最終調整は、これまで通り人が担います。AIはその手前までの下書き役です。</li></ul>
+</section>
+<section id="sns" class="">
+  <div class="schead"><h2>SNS運用</h2><span class="vbadge vok">AI生成→別エージェントで検証・修正済（捏造防止・増幅・安全弁）</span></div>
+  <div class="note">来週そのまま試せる最小キット。担当指導員がそのまま貼る／回せる具体物にしています。<br>対象クライアント例＝LFU様（@ripple_nurse・週2投稿）。実物サンプル「B Instagram 1ヶ月運用パッケージ」（同フォルダ <code>サンプル成果物/B_Instagram_1ヶ月運用パッケージ.md</code>）と中身を合わせています。<br>※注記：本キットは確定データと既存サンプルBから再構成した準拠版です。固有名詞・数値・URL・ツールの導入有無は確定データのみ断定し、未確定はすべて <code><span class="todo">[要確認:…]</span></code> にしています。実キャプションの本文・絵文字はサンプルBを正とします。</div>
+<p>---</p>
+<h3>このキットの目的（ここを外さない）</h3>
+<ul><li>これは<b>人を減らすための道具ではありません</b>。</li><li>AIに下案を任せることで、<b>一人の利用者がこなせる投稿数・担当できるクライアント数を増やし（＝工賃アップ）</b>、<b>指導員7名のQA（最終確認）の負担を軽くする</b>ための道具です。</li><li>投稿・公開の<b>最終GOは必ず人</b>。AIは「テーマ出し・カレンダー・キャプション/ハッシュタグ・分析」の<b>下案づくりまで</b>。</li></ul>
+<p>---</p>
+<h3>A　事前準備（指導員が始める前に埋める／埋まるまで開始しない）</h3>
+<h4>01　人と連絡</h4>
+<ul><li>担当指導員：<code><span class="todo">[要確認：氏名]</span></code></li><li>連絡手段（つまずいたらここに聞く）：<code><span class="todo">[要確認：チャット/電話など]</span></code></li></ul>
+<h4>02　使う道具（AI・デザイン・予約投稿）</h4>
+<ul><li>ChatGPT（<b>導入済み</b>）… テーマ出し・カレンダー・キャプション・ハッシュタグ・分析の下案</li><li>Canva（<b>導入済み</b>）… 画像・リールの仕上げ</li><li>予約投稿ツール：Buffer（<b>例・要確認：未導入なら無料/有料を確認</b>。導入しない場合は、人が手動で時間に投稿する）</li><li>投稿先アカウント：LFU様（@ripple_nurse）／ログイン権限を持つ人：<code><span class="todo">[要確認：氏名]</span></code></li></ul>
+<h4>03　クライアント（LFU様）の中身</h4>
+<ul><li>アカウント：@ripple_nurse（看護系）／投稿頻度：<b>週2</b>（＝月8投稿）</li><li>1投稿の目安単価：<b>¥1,100〜3,300</b>（実績4件のレンジ）</li><li>トンマナ・NG表現・想定読者・避けたい話題：<code><span class="todo">[要確認：クライアント指定をここに転記]</span></code></li><li>医療・健康・効果効能にふれる表現の線引き：<code><span class="todo">[要確認：指導員が確認。薬機法・景品表示法などに触れうるため人が判断]</span></code></li></ul>
+<h4>04　測る基準（実測シート用）</h4>
+<ul><li>従来1投稿あたりの制作時間（AI導入前）：<code><span class="todo">[要確認：分]</span></code></li><li>合格ライン（品質スコアの最低点）：<code><span class="todo">[要確認：点]</span></code></li><li>狙い：<b>LFU様の継続</b>。半自動で月次運用を安定させる。</li></ul>
+<p>---</p>
+<h3>これができあがります（完成のイメージ）</h3>
+<ul><li>1ヶ月の投稿カレンダー（<b>週2 × 4週 ＝ 8投稿</b>）</li><li>各投稿のキャプション下案＋ハッシュタグ下案</li><li>画像/リールはCanvaで仕上げ（人）</li><li>月末に分析の下案（数字は人が貼る）→ 翌月テーマへ</li></ul>
+<p>---</p>
+<h3>守ること（3つ・ここは外さない）</h3>
+<ol><li><b>最終投稿GOは人</b>。送信/公開ボタンは人が押す。AIは下案まで。</li><li><b>炎上・コンプラ・権利は人が判断</b>。画像/音源/他者投稿の引用・商用利用の可否、医療表現、各SNSの規約（自動・予約投稿の可否）は人が確認。</li><li><b>個人情報は載せない</b>。DM・コメントの実名や相談内容を投稿に転用しない。コメントの一次対応も人。</li></ol>
+<p>---</p>
+<h3>始める前の3点チェック（3つそろってから始める）</h3>
+<ul><li>☐ A-03 のトンマナ・NG・想定読者が埋まっている</li><li>☐ 投稿先アカウントにログインできる人が決まっている</li><li>☐ 合格ライン（点数）が決まっている</li></ul>
+<p>---</p>
+<h3>今日やること（全体の流れ）</h3>
+<p>01　テーマを10案出す（AI） → 人が選ぶ</p>
+<p>02　8投稿のカレンダーにする（AI） → 人が確認</p>
+<p>03　各投稿のキャプション＋ハッシュタグ下案（AI）</p>
+<p>04　Canvaで画像/リール仕上げ（人）</p>
+<p>05　<b>最終チェック → 投稿GO（人）</b></p>
+<p>06　月末に分析の下案（AI）→ 翌月へ</p>
+<p>---</p>
+<h3>手順（縦に1ステップずつ。終わったら ☐ にチェック）</h3>
+<ul><li>☐ 01　ChatGPTを開く（A-02のアカウント）</li><li>☐ 02　下の「プロンプト①」を貼って実行 → テーマ案が出る</li><li>☐ 03　良いテーマを人が選ぶ（迷ったら指導員に相談）</li><li>☐ 04　「プロンプト②」を貼ってカレンダー化</li><li>☐ 05　「プロンプト③」で1投稿ずつキャプション＋ハッシュタグ</li><li>☐ 06　Canvaで画像/リールを作る</li><li>☐ 07　「QAプロンプト」で一次チェック（誤字・トンマナ・コンプラ気づき）</li><li>☐ 08　指導員の最終チェック → <b>投稿GO（人）</b></li><li>☐ 09　（任意）Bufferで予約 or 人が手動投稿</li><li>☐ 10　月末に「プロンプト④」で分析の下案</li></ul>
+<div class="note">つまずいたら：AIの答えが長すぎる/ずれている時は「短く」「LFU様のトンマナで」「初心者向けに」と一言足してもう一度。直らなければ指導員へ。</div>
+<p>---</p>
+<h3>そのまま貼るプロンプト（①〜④）</h3>
+<h4>プロンプト①　テーマ出し</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_sns_1',this)">コピー</span></div><pre id="p_sns_1">あなたはSNS運用の編集者です。看護系アカウント（週2投稿）の今月のテーマ案を10個、箇条書きで出してください。
+条件：保存されやすい/共感されやすい/お役立ちの3タイプを混ぜる。医療の断定や効果効能の表現は避ける。
+出力は日本語、各案20字以内のタイトルだけ。</pre></div>
+<h4>プロンプト②　投稿カレンダー（週2×4＝8投稿）</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_sns_2',this)">コピー</span></div><pre id="p_sns_2">選んだテーマ：[ここに人が選んだテーマを貼る]
+これを「週2投稿×4週＝計8投稿」のカレンダーにしてください。
+列：週／曜日／形式（フィード・リール・ストーリー）／テーマ／狙い。
+表形式で。医療の断定・効果効能は避ける。</pre></div>
+<h4>プロンプト③　キャプション＋ハッシュタグ</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_sns_3',this)">コピー</span></div><pre id="p_sns_3">次の投稿のキャプション下案とハッシュタグ下案を作ってください。
+テーマ：[1投稿分を貼る]　形式：[フィード/リール/ストーリー]
+条件：LFU様のトンマナ（[A-03から転記]）。医療の断定・効果効能・誇大表現は使わない。
+最後に「保存・コメント」を促す一文。ハッシュタグは30個以内、大中小のタグを混ぜる。
+※実際の文体・絵文字はサンプルB（B_Instagram_1ヶ月運用パッケージ.md）に合わせる。</pre></div>
+<h4>プロンプト④　分析の下案（数字は人が貼る）</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_sns_4',this)">コピー</span></div><pre id="p_sns_4">今月の数字を貼ります：[保存数/リーチ/コメント数などを人が貼る]
+この数字から「伸びた投稿の共通点」「来月の改善案3つ」を、推測は推測と明記して出してください。
+断定はしない。最終判断は人が行う前提で。</pre></div>
+<p>---</p>
+<h3>QA一次チェックプロンプト（投稿GO前に1回）</h3>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_sns_5',this)">コピー</span></div><pre id="p_sns_5">次のキャプションを、投稿前チェックしてください。
+[キャプションを貼る]
+観点：①誤字脱字 ②LFU様トンマナとのズレ ③医療の断定/効果効能/誇大の疑い ④個人情報や他者の写り込み ⑤炎上しそうな表現。
+気づいた点だけ箇条書きで。直す/直さないの最終判断は人がします。</pre></div>
+<div class="note">★ このQAは「気づき出し」まで。<b>消す・直す・投稿するの判断と実行は人</b>。</div>
+<p>---</p>
+<h3>ルール固定法（毎回ブレないために1回だけ設定）</h3>
+<ul><li>ChatGPTの最初に「LFU様の人格・NG・テーマ軸」を1回貼って固定すると、毎月使い回せる。</li><li>固定文の置き場：<code><span class="todo">[要確認:共有メモ/Canvaブランドキットなど]</span></code></li></ul>
+<p>---</p>
+<h3>1週間／月次 実測シート（このまま記入）</h3>
+<table><tr><th>投稿#</th><th>形式</th><th>従来時間(分)</th><th>AI後時間(分)</th><th>品質スコア</th><th>つまずき</th><th>指導員GO</th></tr><tr><td>1</td><td></td><td><code><span class="todo">[要確認]</span></code></td><td></td><td>/20</td><td></td><td>☐</td></tr><tr><td>2</td><td></td><td></td><td></td><td>/20</td><td></td><td>☐</td></tr></table>
+<ul><li>導入工数の目安：<b>約1人日</b>（人格・NG・テーマ軸を1回設計すれば毎月使い回し）</li><li>期待時短：<b>約50%</b>（人は最終GOと画像仕上げ・コメント対応に集中）</li><li>可逆性：<b>高い（投稿は人がGO）</b></li></ul>
+<h4>増幅KPI（人を減らさない確認）</h4>
+<ul><li>同じ時間で作れた投稿数：従来 <code><span class="todo">[要確認]</span></code> → AI後 <code><span class="todo">[要確認]</span></code></li><li>利用者の担当できるクライアント数の伸び：<code><span class="todo">[要確認]</span></code></li><li>指導員QAにかかった時間の変化：<code><span class="todo">[要確認]</span></code></li></ul>
+<p>---</p>
+<h3>最終チェックリスト（GO前に必ず・上から順に）</h3>
+<ul><li>☐ 誤字脱字なし</li><li>☐ LFU様のトンマナ・NGに反していない</li><li>☐ 医療の断定/効果効能/誇大表現なし（迷ったら指導員へ）</li><li>☐ 画像/音源/引用の権利OK（商用利用の可否を確認）</li><li>☐ 個人情報・他者の写り込みなし</li><li>☐ SNS規約（予約/自動投稿の可否）を確認</li><li>☐ <b>指導員が最終GO → 投稿（人）</b></li></ul>
+<p>---</p>
+<h3>再修正に戻すときの伝え方（テンプレ）</h3>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_sns_6',this)">コピー</span></div><pre id="p_sns_6">この投稿は[理由：トンマナ/コンプラ/誤字…]のため、いったん戻します。
+直してほしい点：[1〜2個に絞って具体的に]
+良かった点：[1つ書くと次が早い]
+不明点は[連絡手段]で聞いてください。一緒に直しましょう。</pre></div>
+<p>---</p>
+<h3>用語辞典（初出の言葉を短く）</h3>
+<ul><li><b>キャプション</b>：投稿に付ける説明文。</li><li><b>ハッシュタグ</b>：#を付けたキーワード。見つけてもらうための札。</li><li><b>リール</b>：縦型の短い動画。</li><li><b>トンマナ</b>：トーン＆マナー。文体や雰囲気のルール。</li><li><b>コンプラ</b>：法律・規約・倫理を守ること（医療表現は特に注意）。</li><li><b>予約投稿</b>：あらかじめ時間を決めて自動で出す機能（Bufferなど。<b>例・要確認</b>）。</li></ul>
+<p>---</p>
+<div class="note">関連：実物サンプル <code>サンプル成果物/B_Instagram_1ヶ月運用パッケージ.md</code>（実キャプション3本・ハッシュタグ・カレンダーの正本）。本キットの手順で作ったものは、必ず人の最終GOを経てから投稿してください。</div>
+</section>
+<section id="list" class="">
+  <div class="schead"><h2>リスト入力／営業</h2><span class="vbadge vok">AI生成→別エージェントで検証・修正済（捏造防止・増幅・安全弁）</span></div>
+  <div class="note">GIF-TECH 確定実績4件（リスト入力／営業）＋ クライアントの声（エイチリンク様・インディバース様（インディバース様＝SEO/被リンク営業）の「フォーム営業メール送信」）に対応。<span class="todo">[要確認：個別の実績番号]</span><br>最も退屈で時間のかかる「企業を探す・問い合わせ先を探す・文面を作る」をAIに寄せ、人は「送信GO」と「重複・法務チェック」に集中する。<br>※これは人を減らす仕組みではない。退屈な収集をAIが巻き取ることで、一人あたりが扱える量と仕事の幅を増やし（＝工賃の増加につなげ）、指導員のQA負担を軽くする「増幅」の取り組み。送信のGO（最終判断）は必ず人が握る。<br>※サンプルは架空。実案件ではクライアントのICP（狙う客像）を差し込む。</div>
+<p>---</p>
+<h3>スプレッドシート カラム設計（このまま使える）</h3>
+<table><tr><th>列</th><th>項目</th><th>入力者</th><th>例</th></tr><tr><td>A</td><td>企業名</td><td>AI（収集）</td><td>株式会社サンプル</td></tr><tr><td>B</td><td>公式URL</td><td>AI</td><td>https://example.co.jp</td></tr><tr><td>C</td><td>業種</td><td>AI（分類）</td><td>SaaS／飲食／士業…</td></tr><tr><td>D</td><td>規模感</td><td>AI</td><td>従業員50〜100名</td></tr><tr><td>E</td><td>問い合わせURL</td><td>AI</td><td>https://example.co.jp/contact</td></tr><tr><td>F</td><td>問い合わせ手段</td><td>AI</td><td>フォーム／メール／なし</td></tr><tr><td>G</td><td>ICP適合度(1-5)</td><td>AI（採点）</td><td>4</td></tr><tr><td>H</td><td>一言メモ（刺さりそうな点）</td><td>AI</td><td>採用動画を内製化したそう</td></tr><tr><td>I</td><td>営業文（差し込み済み）</td><td>AI（生成）</td><td>→下のテンプレ</td></tr><tr><td><b>J</b></td><td><b>送信状況</b></td><td><b>人</b></td><td>未送信／送信済／返信あり</td></tr><tr><td><b>K</b></td><td><b>重複・NGチェック</b></td><td><b>人</b></td><td>既存客でないか確認済</td></tr></table>
+<div class="note">A〜I を AI が埋め、J・K は人が判断。<b>送信は人が1社ずつGOを出す</b>（誤送信・規約違反を防ぐ安全弁）。<br>※A〜H で収集する企業名・URL・問い合わせ先などの数値や固有名詞は、人が一次情報（公式サイト等）で確認してから使う。AIの出力をそのまま事実として断定しない。</div>
+<p>---</p>
+<h3>収集の手順（半自動）</h3>
+<ol><li>ICP（狙う客像）を1文で定義</li></ol>
+<p>例：「東京都内・従業員30〜200名・自社でYouTube/SNSを始めたが運用が回っていないBtoC企業」</p>
+<ol><li>AIリサーチ／スクレイピングで候補をA〜Hに収集（指定KWの検索上位N社、業界リスト等）</li></ol>
+<p>※スクレイピングツールは<b>（例・要確認：未導入なら無料/有料を確認。導入済みではない）</b>。各サイトの規約・robots.txt を必ず守る。</p>
+<ol><li>AIがICP適合度（G列）を採点し、4以上だけ営業対象に</li><li>AIが各社の「刺さりそうな点」（H列）を読み取り、それを差し込んだ営業文（I列）を生成</li><li><b>人が J・K を確認 → 1社ずつ送信</b></li></ol>
+<div class="note">法務注意：スクレイピングは各サイトの規約・robots、フォーム送信はメール送信に関する法令や各フォームの利用規約に従う。個人情報は個人情報保護に関する法令に従う。（特定電子メール法・個人情報保護法などが代表例。<b>適用可否や最新の規定は人／専門家が確認する</b>）。<b>ここの最終責任は人</b>。</div>
+<p>---</p>
+<h3>フォーム営業文テンプレ（業種別2パターン・サンプル）</h3>
+<div class="note">※下記の単価・人数・取引条件は <span class="todo">[要確認：…]</span> のまま。送る前に必ず確定値に差し替える（未確認の数字をそのまま送らない）。</div>
+<h4>パターン①：SNS/動画運用が回っていないBtoC企業向け</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_list_1',this)">コピー</span></div><pre id="p_list_1">件名：貴社のSNS運用を「続けられる仕組み」にするご提案（{企業名}様）
+
+{企業名}ご担当者様
+
+突然のご連絡失礼いたします。{差出人}と申します。
+貴社の{H列＝刺さる点／例：Instagramを開設されたばかりとお見受けし}、
+「始めたものの更新が止まりがち」という課題をよく伺うため、ご連絡しました。
+
+私たちは、スタッフ（[要確認：在籍スタッフ数]名）がチームで
+動画編集・SNS投稿制作・ライティングを代行する事業所です。
+ディレクター（品質管理担当）が品質をチェックしてから納品するため、
+品質が安定し、低価格でご提供できます。
+
+・Instagram投稿制作：1投稿 [要確認：単価]円〜
+・YouTube動画編集：1本 [要確認：単価]円〜
+・まずは1本からのテスト発注も可能です
+
+ご興味があれば、貴社アカウントを拝見した上で
+「最初の1ヶ月の投稿プラン」を無料でご提案します。
+ご返信お待ちしております。</pre></div>
+<h4>パターン②：SEO/被リンク施策をしている企業（代行ニーズ）向け</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_list_2',this)">コピー</span></div><pre id="p_list_2">件名：SEOの「手が足りない単純作業」を巻き取ります（{企業名}様）
+
+{企業名}ご担当者様
+
+{差出人}と申します。{H列＝刺さる点／例：オウンドメディアを運営されているご様子から}、
+「記事入稿・リライト・フォーム営業・リスト作成など、
+人手はかかるが付加価値の低い作業」のリソース不足を想定しご連絡しました。
+
+私たちはこうした“ラストワンマイル”の作業を、
+低価格・スピーディに代行する事業所です。[要確認：『最安』『業界最安』等の最上級表示は客観的根拠が必要（景品表示法）。根拠が無ければ書かない]
+ディレクター（品質管理担当）が間に入って品質を担保します。
+
+・記事リライト：1記事 [要確認：単価]円〜
+・リスト作成／フォーム営業：1件 10円〜（工数により変動）
+・[要確認：取引条件（NDA・支払条件など）]
+
+まずは小さなテスト発注で品質をご確認ください。
+ご返信いただければ、貴社に合う作業の切り出し方をご提案します。</pre></div>
+<p>---</p>
+<h3>効果の目安</h3>
+<ul><li>従来：1社あたり「探す＋問い合わせ先特定＋文面作成」で 8〜15分（実測前の概算。パイロットで計測する）</li><li>半自動後：A〜I の生成が 1社あたり 1〜2分（同・概算）、人は送信判断のみ（<b>時短 約70〜80%</b>）</li><li>導入工数：<b>約2〜3人日</b>（収集スクリプト＋ICP採点プロンプト＋文面テンプレの初期構築）</li><li>可逆性：送信は人がGOを出すまで外に出ない（やり直しが効く）。</li></ul>
+<div class="note">ねらい：継続2社の定型業務の退屈な収集を消し、一人あたりが回せる量を伸ばす（＝工賃と仕事の幅の増幅）。人を減らすためのものではない。</div>
+<h3>導入に必要なもの</h3>
+<ul><li>AIリサーチ：<b>ChatGPT（導入済み）</b> ＋ スクレイピング<b>（例・要確認：未導入なら無料/有料を確認。導入済みではない）</b> ＋ スプレッドシート（既存）</li><li>任意：Clay / Apollo 等のリスト・エンリッチSaaS<b>（例・要確認：未導入なら無料/有料を確認。導入済みではない）</b>（精度を上げたい場合）</li></ul>
+</section>
+<section id="web" class="">
+  <div class="schead"><h2>WEB制作</h2><span class="vbadge vok">AI生成→別エージェントで検証・修正済（捏造防止・増幅・安全弁）</span></div>
+  <div class="note">GIF-TECH実績（WEB制作・5件／既存例 porepore2022.com 等）に対応するサンプル。<br>HP ¥33〜66万／LP ¥11〜66万／保守 ¥1.1〜3.3万/月 の制作で、「LP・モックの叩き台」をAIで素早く出し、情報設計・コードレビュー・本番デプロイは人が必ず仕上げる手順に固定したもの。<br>ねらい：初稿は秒。仕上げ・本番は人。一人あたりの仕事の幅と工賃を増やし、指導員のQA（品質チェック）負担を軽くするための道具です。人を減らす手順ではありません。<br>※本文はすべてサンプル（架空のお題）。実案件では実際の要件・原稿を差し込みます。固有名詞・価格・連絡先・URLは <span class="todo">[要確認]</span> のまま残し、人が一次情報で確認して埋めます（捏造禁止）。</div>
+<p>---</p>
+<h3>まず知っておくこと（むずかしくないです）</h3>
+<ul><li>LP（エルピー）＝1ページで商品やサービスを紹介して申し込みにつなげる縦長のページ。</li><li>モック＝完成イメージの「仮の見本」。本物そっくりの下書きのこと。</li><li>この手順は「叩き台（初稿）を秒で出す」ところまでをAIに任せ、仕上げ・公開は人が行います。</li><li>迷ったら止めてOK。指導員に「ここまでできました、次どうしますか」で大丈夫です。</li></ul>
+<p>---</p>
+<h3>工程（全7ステップ・所要は目安）</h3>
+<table><tr><th>手順</th><th>担当</th><th>所要(目安)</th><th>中身</th></tr><tr><td>01. 要件と狙いの受領</td><td>利用者＋指導員</td><td>10分</td><td>誰に何を届けるページか、載せる要素、参考サイトをヒアリング</td></tr><tr><td>02. 情報設計（構成・導線）</td><td>指導員＋利用者</td><td>15分</td><td>★ここは人。セクションの順番・CTA（申込ボタン）・伝える順を決める。AIに丸投げしない</td></tr><tr><td>03. コピー（文章）の下書き</td><td>AI</td><td>2分</td><td>プロンプト1。各セクションの見出し・本文の叩き台を出す</td></tr><tr><td>04. LP/モックの叩き台生成</td><td>AI</td><td>3分</td><td>プロンプト2。HTML・部品（コンポーネント）の叩き台。価格や連絡先は <span class="todo">[要確認]</span> で空欄にする</td></tr><tr><td>05. 画像の用意・最適化</td><td>利用者</td><td>10分</td><td>導入済みのCanva／Photoshopで素材作成・圧縮。素材の商用利用OKかを確認</td></tr><tr><td>06. コードレビュー／セキュリティ点検</td><td>指導員</td><td>20〜30分</td><td>★ここは人。リンク切れ・フォームの送信先・個人情報の扱い・表記を点検</td></tr><tr><td>07. 本番デプロイ（公開）</td><td>指導員（責任者）</td><td>10分</td><td>★公開GOは人。最終確認のうえ、公開ボタンは人が押す</td></tr></table>
+<p><b>ポイント：確定データのとおり、叩き台（初稿）づくりが約80%短縮できます。</b> 浮いた時間を仕上げ・レビュー・本番の確認に回します。</p>
+<p><b>導入工数：約2〜3人日</b>（クライアント別のテンプレを1回作れば、以降は使い回し）。<b>いつでも元に戻せます（可逆）。</b></p>
+<p>WEB制作は単価が高いぶん件数は少なめなので、1件ずつていねいに、人の確認を厚くします。</p>
+<p>---</p>
+<h3>プロンプト1：コピー（文章）の下書き</h3>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_web_1',this)">コピー</span></div><pre id="p_web_1">あなたはLPのコピーライターです。次の要件で、各セクションの見出しと本文の
+「叩き台」を作ってください。
+・出す順番は私が渡す構成案のとおりにする（勝手に並べ替えない）
+・会社名・価格・実績の数字・電話番号・住所・URLは [要確認] と書いて空欄にする（作らない）
+・断定できない数字や効果は書かない（「必ず治る」等の言い切りは禁止）
+・読者：&lt;例：肩こりに悩む30〜50代の近隣住民&gt;
+・トーン：&lt;例：やさしく・押し売りしない・専門用語は短く補足&gt;
+【構成案】&lt;手順02で人が決めた構成を貼る&gt;</pre></div>
+<h3>プロンプト2：LP/モックの叩き台（HTML・部品）</h3>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_web_2',this)">コピー</span></div><pre id="p_web_2">上のコピーを使って、1ページのLPのHTMLの叩き台を作ってください。
+・セクションごとにコメントで区切る（後で人が編集しやすいように）
+・価格・連絡先・フォームの送信先・URL・画像のパスは [要確認] のダミーにする
+・問い合わせフォームは「送信先は人が設定」とコメントを残し、実際の宛先は入れない
+・装飾は最小限。色やフォントは指定があればそれに合わせ、なければ無難な既定にする
+・著作権のある画像・フォント・ロゴは埋め込まない（人が商用OKの素材に差し替える前提）</pre></div>
+<h3>プロンプト3：叩き台のセルフチェック（人に渡す前に）</h3>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_web_3',this)">コピー</span></div><pre id="p_web_3">今作ったLPの叩き台を、次の観点で自己点検して、直すべき点を箇条書きにしてください。
+・[要確認] の埋め忘れ／勝手に作った固有名詞・数字がないか
+・誇大表現・医療や効果の言い切りがないか
+・導線（申込ボタン）が各セクションから分かりやすいか
+・スマホで読んだとき崩れそうな箇所はないか</pre></div>
+<p>---</p>
+<h3>生成サンプル（お題：架空「地域の整体院の新規集客LP」）</h3>
+<h4>構成案（手順02で人が決めた例）</h4>
+<ul><li>01 ファーストビュー：悩み＋できること＋申込ボタン</li><li>02 こんな悩みありませんか（共感）</li><li>03 当院でできること（特徴3つ）</li><li>04 料金・メニュー（<span class="todo">[要確認]</span>）</li><li>05 お客様の声（<span class="todo">[要確認／掲載許可の確認]</span>）</li><li>06 アクセス・営業時間（<span class="todo">[要確認]</span>）</li><li>07 申込フォーム（送信先は人が設定）</li></ul>
+<h4>コピー叩き台サンプル（01 ファーストビュー）</h4>
+<div class="note">その肩こり、「いつものこと」とあきらめていませんか。<br><span class="todo">[要確認：院名]</span> は、お一人おひとりの状態に合わせた施術で、毎日をらくにするお手伝いをします。<br>まずはお気軽にご相談ください。［初回料金は要確認］［電話番号は要確認］<br><br>※「必ず治る」「効果を保証」などの言い切りは入れません（人が表現を最終確認）。</div>
+<h4>★人がやる仕上げチェックリスト（ここを省くと事故ります）</h4>
+<ul><li>☐ 情報設計（構成・導線）を人が確認した（AIの並びを鵜呑みにしない）</li><li>☐ <span class="todo">[要確認]</span> 箇所をすべて一次情報で埋めた（院名・価格・電話・住所・URL・実績）</li><li>☐ 画像・写真・フォント・アイコンの商用利用ライセンスを確認した（生成画像も利用範囲を確認）</li><li>☐ お客様の声・写真は本人の掲載許可を取った（個人情報）</li><li>☐ 問い合わせフォームの送信先・保存先・SSL（暗号化）・プライバシーポリシーを確認した</li><li>☐ リンク切れ・誤字脱字・スマホ表示崩れを点検した</li><li>☐ コードレビュー／セキュリティ点検を指導員が実施した（AIの叩き台をそのまま本番に出さない）</li><li>☐ 本番デプロイ（公開）の最終GOを責任者が出した（公開ボタンは人が押す）</li></ul>
+<p>---</p>
+<h3>導入に必要なもの</h3>
+<ul><li>ChatGPT（導入済み）… コピー下書き・LP/モックの叩き台生成に使用</li><li>Canva／Photoshop（導入済み）… 画像の作成・最適化（圧縮・サイズ調整）に使用</li><li>WordPress（導入済み）… 納品先がWordPressのときはそのまま入稿できる</li><li>v0・Framer・Lovable（例・要確認：未導入なら無料/有料を確認）… コード付きのモックを速く出したいときの選択肢。導入済みかどうかは要確認</li><li>導入工数：<b>約2〜3人日</b>（クライアント別テンプレを1回作れば、以降は使い回し・いつでも元に戻せる）</li></ul>
+<p>---</p>
+<h3>安全弁（最終GOは必ず人）</h3>
+<ul><li>送信・公開・入稿・本番デプロイの最終GOは必ず人（指導員／責任者）。AIは下書き・下準備までです。</li><li>事実・固有名詞・価格・連絡先・URLは <span class="todo">[要確認]</span> のまま残し、人が一次情報で確認して埋めます（捏造禁止）。</li><li>権利：画像・写真・フォント・ロゴ・アイコンの商用利用ライセンスを公開前に必ず確認します（生成画像の利用範囲も確認）。</li><li>個人情報：お客様の声・写真は掲載許可を取り、問い合わせフォームの送信先・保存先・SSL・プライバシーポリシーを人が確認します。</li><li>コードレビュー／セキュリティは人の必須工程です。AIが作った叩き台をそのまま本番に出しません。</li><li>このAIは人を減らすためではなく、一人あたりの仕事の幅と工賃を増やし、指導員のチェック負担を軽くするための道具です。</li></ul>
+</section>
+<section id="photo" class="">
+  <div class="schead"><h2>写真（撮影後の現像・レタッチ）</h2><span class="vbadge vok">AI生成→別エージェントで検証・修正済（捏造防止・増幅・安全弁）</span></div>
+  <h3>現像・セレクト・レタッチ・ノイズ除去（来週そのまま試せる版）</h3>
+<div class="note">対象業務＝写真撮影（実績5件／単価¥3,300〜5,500／代表クライアント＝飲食・食品 例：@etablefoods 等）。<br><b>このキットが扱うのは「撮影が終わったあと」の作業だけです。</b> 撮影そのもの（カメラを構えて撮る＝物理作業）はAIにはできません。だからこのキットでAIに任せるのは、撮ったあとの「選ぶ・明るさを整える・ザラつきを消す・レタッチの下ごしらえ」までです。<br><b>ねらい＝撮影後の単純作業をAIが巻き取り、利用者は「撮ること」と「仕上げの良し悪しを決めること」に集中できるようにする。</b> 一人が扱える写真の点数と仕事の幅（＝工賃）を増やし、指導員は1枚ずつの全件目視から「AIが整えた候補の最終確認」に回れてチェックの負担が軽くなります。<br>※固有名詞・数値・URL・クライアント名は確定情報のみ記載。未確定は <span class="todo">[要確認：…]</span> と空欄にしています。<b>埋まるまでパイロットは始めません。</b></div>
+<p>---</p>
+<h3>A 指導員の事前準備チェック（パイロット開始の前に埋める）</h3>
+<p>開始前に下の ☐ をすべて埋めてください。半日〜1日で埋まる想定です。<b>埋まるまで開始しない</b>ゲートです。</p>
+<ul><li>☐ 担当指導員名・連絡手段： <span class="todo">[要確認：…]</span></li><li>☐ 今回扱うクライアントと案件： <span class="todo">[要確認：例 @etablefoods の料理写真 ○○点]</span></li><li>☐ 元写真の受け取り場所と渡し方： <span class="todo">[要確認：共有フォルダ名／枚数／形式（JPEG/RAW）]</span></li><li>☐ 仕上がりの見本（OK例・NG例 各数枚）： <span class="todo">[要確認：…]</span>　← AIに「正解の雰囲気」を教える基準になります</li><li>☐ クライアントのトンマナ： <span class="todo">[要確認：例 明るめ・自然な色・盛りすぎNG 等]</span></li><li>☐ 納品先と納品形式： <span class="todo">[要確認：サイズ／枚数／ファイル名ルール]</span></li><li>☐ <b>【権利・コンプラ】写真にお店の人やお客さんが写っていないか</b>： <span class="todo">[要確認：写り込みの有無／写っている場合の使用許可の有無]</span></li><li>☐ <b>【権利・コンプラ】クライアントの写真を外部のAIツールに渡してよいか</b>： <span class="todo">[要確認：契約・規約上の可否]</span>　← クラウドに画像を送るツールは契約と規約を人が確認してから使う</li><li>☐ 使うツールの確定（下のC・Hの表を参照）： <span class="todo">[要確認：Photoshop以外を使うか／使う場合は無料か有料か]</span></li><li>☐ 従来の作業時間の基準（ベースライン）： <span class="todo">[要確認：1案件◯点でいつも何分くらいか]</span>　← 効果を測る出発点</li><li>☐ 合格ライン： <span class="todo">[要確認：何があればOKとするか（ピント・色・ザラつき・盛りすぎ無し 等）]</span></li></ul>
+<div class="note">★ ここが埋まっていないと、AIに任せても「何が正解か」が決まらず、やり直しが増えます。先に埋めるのが近道です。</div>
+<p>---</p>
+<h3>B 利用者用 1ページ手順書（撮影後だけ・縦ステップ）</h3>
+<div class="note">1ステップ＝1つの作業です。むずかしくありません。困ったら各ステップの「こまったとき」を見てください。<br><b>送る・納品する最後のボタンは、いつも指導員と一緒に押します。</b></div>
+<p><b>01 写真を受け取る</b></p>
+<p>共有フォルダから今回ぶんの写真を自分の作業フォルダにコピーする。</p>
+<p>→ こまったとき：枚数が見本とちがう／開けない写真がある → コピーする前に指導員へ一声。</p>
+<p><b>02 元の写真をそのまま残す（コピーで作業）</b></p>
+<p>元フォルダはさわらず、コピーした方だけで作業する。</p>
+<p>→ こまったとき：上書きしそうで不安 → フォルダ名のおしりに「_作業用」と付けると安心。やり直しはいつでもできます（この作業は元に戻せます）。</p>
+<p><b>03 いる写真・いらない写真を分ける（セレクト＝選別）</b></p>
+<p>ピンボケ・目つむり・似すぎた写真をよける。AIの選別補助を使ってよい（C-01）。</p>
+<p>→ こまったとき：AIが「いる」にした写真がイマイチ → 自分の目を優先してOK。最後に決めるのは人です。</p>
+<p><b>04 明るさ・色を整える（現像）</b></p>
+<p>基準の設定（プリセット）をまとめて当てる＝バッチ現像（C-02）。</p>
+<p>→ こまったとき：1枚だけ暗い/明るい → その1枚だけ手で直す。全部に同じ設定が合わなくて普通です。</p>
+<p><b>05 ザラつきを消す（ノイズ除去）・かんたんレタッチ</b></p>
+<p>暗い場所で出たザラつきを消す。ゴミや小キズを消す程度のレタッチをAI補助で下ごしらえ（C-03）。</p>
+<p>→ こまったとき：消しすぎてのっぺりした → 一段弱める。<b>「やりすぎ」は戻す</b>のが基本です（迷ったら指導員へ）。</p>
+<p><b>06 自分で見直す（人の目で最終チェック）</b></p>
+<p>見本とくらべて、色・ピント・盛りすぎがないか確認。Dの一次チェックも使う。</p>
+<p>→ こまったとき：見本とどこか違う気がする → 言葉にできなくてOK。「ここが気になる」と指導員に見せる。</p>
+<p><b>07 指導員と最終確認 → 納品</b></p>
+<p>Gの最終チェックを指導員と一緒に通す。<b>納品ボタンは人が押す。</b></p>
+<p>→ こまったとき：直しが返ってきた → 差し戻しは失敗ではなく普通の工程です。落ち込まなくて大丈夫。</p>
+<p>---</p>
+<h3>C そのまま使う「指示・設定メモ」</h3>
+<div class="note">AIに任せるのは選別・現像・ノイズ除去・レタッチ補助まで。<b>写真を外部AIに渡す前に、Aの権利チェックが済んでいることを確認。</b></div>
+<h4>C-01 セレクト（選別）補助の基準メモ（人の判断を言葉にして渡す）</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_photo_1',this)">コピー</span></div><pre id="p_photo_1">今回の選別基準（この順で残す/よける）
+・よける：ピンボケ／目つむり／手ブレ／同じ構図の重複（ベスト1枚だけ残す）
+・優先で残す：主役（料理・商品）にピントが合っている／湯気・シズル感がある／盛り付けが整っている
+・最終判断は人。AIの提案はあくまで下候補。</pre></div>
+<p>（使うツール例：Photoshop＝導入済み／Aftershoot＝例・要確認：未導入なら無料/有料を確認）</p>
+<h4>C-02 バッチ現像プリセットの覚書（まとめて同じ設定を当てる）</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_photo_2',this)">コピー</span></div><pre id="p_photo_2">基準プリセット（クライアント見本に合わせる・最初に指導員と1回決める）
+・明るさ/露出：見本に合わせる
+・ホワイトバランス：自然な色（盛りすぎない）
+・彩度：上げすぎ注意（料理は「おいしそう」止まりで、嘘の色にしない）
+※1枚ずつ違う条件のものは外して手で調整する</pre></div>
+<p>（使うツール例：Photoshop＝導入済み／Lightroom＝例・要確認：未導入なら無料/有料を確認）</p>
+<h4>C-03 ノイズ除去・レタッチ補助の指示メモ</h4>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_photo_3',this)">コピー</span></div><pre id="p_photo_3">・ノイズ除去：ザラつきが消える最小限まで。ディテール（料理の質感）を残す
+・レタッチ：ゴミ・小さなキズ・写り込みを消す程度
+・禁止：実物と変わるほどの加工（料理の色や形を作り変えない）＝「やりすぎ」防止</pre></div>
+<p>（使うツール例：Photoshop＝導入済み／Topaz＝例・要確認：未導入なら無料/有料を確認）</p>
+<div class="note">注意：Photoshopの一部の生成系機能や、クラウド型ツールは画像が外部に送信されることがあります。<b>Aの「外部AIに渡してよいか」が確認できるまで、クラウド送信を伴う機能は使わない。</b></div>
+<p>---</p>
+<h3>D QA一次チェック（指導員の負担を軽くする・利用者が先に通す）</h3>
+<p>納品前に利用者がまず自分で通すチェック。ここを通すと指導員の最終確認がぐっと速くなります。</p>
+<ul><li>☐ 見本のOK例と「色・明るさ」の方向が合っている</li><li>☐ 主役（料理・商品）にピントが合っている</li><li>☐ ザラつき・ゴミ・写り込みが気にならない</li><li>☐ <b>盛りすぎ・作り変えになっていない（実物と色や形が変わっていない）</b></li><li>☐ ピンボケ／目つむり／重複の写真が混ざっていない</li><li>☐ ファイル名・サイズ・枚数が指定どおり</li><li>☐ 人が写っている場合、使ってよい写真だけになっている（A参照）</li></ul>
+<p>---</p>
+<h3>E ルールの固定法（毎回同じ品質を出すコツ）</h3>
+<ul><li>クライアントごとに「見本フォルダ＋基準プリセット（C-02）＋NG（盛りすぎ等）」を1セットで保存しておく。</li><li>次回からはそのセットを呼び出すだけ → 誰がやっても同じ仕上がりに近づく。</li><li>基準を変えたら、見本も1枚差し替えてズレを防ぐ。</li></ul>
+<p>---</p>
+<h3>F 1週間 実測シート（効果を「測ってから」判断する）</h3>
+<div class="note">導入工数・時短率は現時点では未確定です（<b>要検証</b>）。決めつけず、この1週間で実際に測ります。<br>スプレッドシート（またはCSV・UTF-8）に下の列で記入。サンプル行のあとに空行を用意。</div>
+<table><tr><th>日付</th><th>案件/クライアント</th><th>枚数</th><th>従来の想定時間（ベースライン）</th><th>AI後の実所要</th><th>工程内訳（選別/現像/ノイズ/レタッチ/確認）</th><th>仕上がり自己評価(1-5)</th><th>指導員評価(1-5)</th><th>差し戻し回数</th><th>つまずき内容</th><th>使ったツール</th><th>外部送信の有無/確認済み</th></tr><tr><td><span class="todo">[要確認]</span></td><td><span class="todo">[要確認]</span></td><td><span class="todo">[要確認]</span></td><td><span class="todo">[要確認]</span></td><td><span class="todo">[要確認]</span></td><td><span class="todo">[要確認]</span></td><td><span class="todo">[要確認]</span></td><td><span class="todo">[要確認]</span></td><td><span class="todo">[要確認]</span></td><td><span class="todo">[要確認]</span></td><td><span class="todo">[要確認]</span></td><td><span class="todo">[要確認]</span></td></tr></table>
+<p><b>この表で見たいこと（KPIの考え方）</b></p>
+<ul><li>ガードレール（守れているか）：差し戻し回数が増えていないか／「やりすぎ」加工が出ていないか／外部送信の確認漏れがないか</li><li>増幅（伸びているか）：1日に整えられる<b>枚数（＝工賃）が増えたか</b>／指導員の確認時間が減ったか／扱える案件の幅が広がったか</li><li>ベースライン：初日に「従来だと何分か」を必ず記録（出発点）</li></ul>
+<p>---</p>
+<h3>G 指導員の最終チェック ＋ 差し戻しテンプレ</h3>
+<p><b>最終チェック（納品の前に・人が確認）</b></p>
+<ul><li>☐ クライアントのトンマナ・合格ラインを満たしている</li><li>☐ 事実・実物との一致（料理/商品の色・形を作り変えていない）</li><li>☐ 権利・個人情報（人物の写り込み・使用許可）に問題がない</li><li>☐ ツール規約・クラウド送信の確認が済んでいる</li><li>☐ ファイル名・サイズ・枚数・納品先が指定どおり</li><li>☐ <b>納品/送付/公開のボタンは指導員（人）が押す</b></li></ul>
+<p><b>差し戻しテンプレ（委縮させない言い方で）</b></p>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_photo_4',this)">コピー</span></div><pre id="p_photo_4">ここまでありがとうございます。あと一歩だけ整えましょう。
+・直す点：&lt;例 5枚目だけ色が強いので一段ナチュラルに&gt;
+・理由：&lt;例 見本より盛りすぎに見えるため&gt;
+・ここは良かった：&lt;必ず1つ書く&gt;
+直したらまた見せてください。やり直しは普通の工程です。</pre></div>
+<p>---</p>
+<h3>H 用語辞典（はじめて出た言葉の短い説明）</h3>
+<ul><li><b>セレクト（選別）</b>：撮った写真から、使う・使わないを分ける作業。</li><li><b>現像</b>：明るさや色を整えること（フィルムを現像するのと同じ言葉の名残）。</li><li><b>バッチ（処理）</b>：同じ設定を、たくさんの写真に「まとめて」当てること。</li><li><b>ノイズ除去</b>：暗い場所で出る写真の「ザラつき」を消すこと。</li><li><b>レタッチ</b>：ゴミ・小キズ・写り込みなどを消して整えること。</li><li><b>プリセット</b>：あらかじめ決めておいた設定のまとまり。呼び出すだけで同じ仕上がりにできる。</li><li><b>ベースライン</b>：効果を測るための「いつもの時間」の出発点。</li><li><b>トンマナ</b>：トーン＆マナー。色や雰囲気の「らしさ」のこと。</li></ul>
+<p>---</p>
+<h4>使うツール早見表</h4>
+<ul><li>Photoshop … <b>導入済み</b>（バッチ・ノイズ除去・レタッチ補助）</li><li>Lightroom … （例・要確認：未導入なら無料/有料を確認。現像・カタログ管理）</li><li>Aftershoot … （例・要確認：未導入なら無料/有料を確認。セレクト自動化）</li><li>Topaz … （例・要確認：未導入なら無料/有料を確認。ノイズ除去・高解像度化）</li></ul>
+<div class="note"><b>約束ごと（崩さない）</b>：撮影そのものは人。審美の最終判断と「やりすぎ防止」は人。納品・送付・公開の最終GOは人。事実・固有名詞・権利・個人情報・規約の責任は人。AIは撮影後の下ごしらえまで。この作業は元写真を残す限り<b>やり直せます（可逆）</b>。</div>
+</section>
+<section id="admin" class="">
+  <div class="schead"><h2>その他事務（画像補正・切り抜き）</h2><span class="vbadge vok">AI生成→別エージェントで検証・修正済（捏造防止・増幅・安全弁）</span></div>
+  <h4>GIF-TECH&#x27;s WORKS（就労継続支援B型事業所・在宅PC業務代行）／来週そのまま試せる版</h4>
+<div class="note">このキットの約束（最初に読む）<br>- ★ これは人を減らす道具ではありません。今と同じ時間で扱える枚数と仕事の幅を増やし、工賃を上げ、指導員の目視チェックの負担を軽くするための「増幅」の道具です。<br>- ★ 送信・公開・<b>納品の最終OK（GO）は必ず人</b>が出します。AIは下書き・下準備まで。<br>- ★ 事実・固有名詞・数値は、このキットに書いてある確定分だけ使います。わからない所は <code><span class="todo">[要確認：…]</span></code> のまま空けて、指導員が埋めるまで先に進めません。<br>- ★ AIにできるのは<b>画像補正・切り抜きだけ</b>です。梱包などの手作業はAIの対象外（人の仕事のまま）。</div>
+<p>---</p>
+<h3>このパイロットで何を省力化するのか（1行）</h3>
+<ul><li>対象＝<b>非公開クライアントの漫画補正（月200ページ）の定型作業</b>＝「漫画のゴミ消し・不要物の除去」と「素材の切り抜き」。</li><li>効果の見込み＝<b>時短 50〜70%（要・現場での品質検証）／導入工数 3〜5人日（品質検証込み）／いつでも元に戻せる（可逆）</b>。</li><li>やらないこと＝梱包（¥110）などの物理作業。これはAIにできないので人が担当のまま。</li></ul>
+<p>参考の単価（確定分）：切り抜き ¥220／件、画像補正 ¥5.5／枚、梱包 ¥110。</p>
+<p>---</p>
+<h3>A 事前準備（指導員が埋める。ここが埋まるまでパイロット開始しない）</h3>
+<p>各項目を埋めてからスタート。半日〜1日で埋まる想定。</p>
+<table><tr><th>No</th><th>埋める項目</th><th>記入欄</th></tr><tr><td>01</td><td>担当指導員の名前・連絡手段</td><td><code><span class="todo">[要確認：担当指導員名／連絡手段]</span></code></td></tr><tr><td>02</td><td>対象クライアント（社外には出さない）</td><td>非公開（漫画補正 月200ページ）</td></tr><tr><td>03</td><td>使う画像補正ツールとログイン</td><td>Photoshop（<b>導入済み</b>・生成塗りつぶし）／<code><span class="todo">[要確認：ログイン担当・PC]</span></code></td></tr><tr><td>04</td><td>切り抜きで使う候補ツール</td><td><code><span class="todo">[要確認：Remove.bg は未導入の可能性。例・要確認：未導入なら無料/有料プラン・利用規約・商用可否を人が確認してから使う。Photoshopの被写体選択でも可]</span></code></td></tr><tr><td>05</td><td>原稿・素材の受け渡し場所と保管・破棄ルール</td><td><code><span class="todo">[要確認：保存先フォルダ／納品後の素材の扱い]</span></code></td></tr><tr><td>06</td><td>このクライアントの「絶対やってはいけない事(NG)」</td><td><code><span class="todo">[要確認：改変NGの範囲・タッチ・トーン]</span></code></td></tr><tr><td>07</td><td>「仕上がり合格」の基準（見本があれば）</td><td><code><span class="todo">[要確認：合格見本／OKの線引き]</span></code></td></tr><tr><td>08</td><td>従来の1枚あたり所要時間（比べる基準）</td><td><code><span class="todo">[要確認：従来見込 ◯分/枚]</span></code></td></tr><tr><td>09</td><td>権利・個人情報の確認先</td><td><code><span class="todo">[要確認：著作権・肖像権の確認担当]</span></code></td></tr></table>
+<p>---</p>
+<h3>B 利用者用 1ページ手順書（縦に01→06。短く・つまずいたら止まる）</h3>
+<div class="note">困ったら無理に直さず、印をつけて指導員に渡してOKです。止まるのも仕事のうちです。</div>
+<p><b>01　元の絵をコピーしてから始める</b></p>
+<ul><li>▸ 作業用のコピーを作る。元ファイルはさわらない（やり直せるように）。</li></ul>
+<p>→ つまずき：コピーの作り方がわからない → 指導員に「複製の仕方」を聞く。</p>
+<p><b>02　消したい所をなぞる</b></p>
+<ul><li>▸ 消したいゴミ・不要物を、Photoshopの「なげなわ」などでぐるっと囲む。</li></ul>
+<p>→ つまずき：囲む範囲が大きすぎ/小さすぎ → 少し広めに囲んで様子を見る。</p>
+<p><b>03　生成塗りつぶしで消す</b></p>
+<ul><li>▸ 囲んだら「生成塗りつぶし」を押し、Cの指示文（短い言葉）を入れて実行。</li></ul>
+<p>→ つまずき：思った所が消えない/別物が描かれた → やり直し（Ctrl+Z／Cmd+Z）して02からもう一度。<b>勝手に描き足されたら採用しない</b>。</p>
+<p><b>04　切り抜き（必要なときだけ）</b></p>
+<ul><li>▸ 被写体を選んで背景を切り抜く。ツールはAの04のとおり。</li></ul>
+<p>→ つまずき：髪の毛・細い線がギザギザ → 印をつけて指導員へ（細部は人が直す）。</p>
+<p><b>05　自分で見直す（目視確認）</b></p>
+<ul><li>▸ 元の絵と並べて、線・トーン・キャラの表情が変わっていないか確認。</li></ul>
+<p>→ つまずき：直すべきか迷う「例外ページ」 → 直さずに印をつけて指導員へ回す。</p>
+<p><b>06　指導員に渡す</b></p>
+<ul><li>▸ ☐ 元データは残っている　☐ 消し残し/描き足しがない　☐ 迷ったページに印 → 指導員へ提出。</li></ul>
+<p>※ クライアントへの<b>納品OKは指導員（人）</b>が出します。利用者・AIは出しません。</p>
+<p>---</p>
+<h3>C そのまま使う指示文（Photoshopの生成塗りつぶしに入れる短い言葉）</h3>
+<div class="note">生成塗りつぶしは「短い言葉」で動きます。狙いは“消す/きれいにする”であって“新しく描き足す”ことではありません。描き足された結果は採用しないでください。</div>
+<p><b>① ゴミ・不要物を消す（背景になじませる）</b></p>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_admin_1',this)">コピー</span></div><pre id="p_admin_1">選択範囲を、まわりの背景と同じになるように自然に埋める。新しい絵や文字は描き足さない。</pre></div>
+<p><b>② ベタ・トーンの汚れを消す</b></p>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_admin_2',this)">コピー</span></div><pre id="p_admin_2">選択範囲を、隣接するベタ（またはトーン）と同じ濃さ・パターンで埋める。線やキャラクターは変えない。</pre></div>
+<p><b>③ 切り抜き前の背景を白くする（切り抜きツールが無い場合の下準備）</b></p>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_admin_3',this)">コピー</span></div><pre id="p_admin_3">選択した背景部分を無地の白で埋める。被写体（人物・キャラクター）には手を加えない。</pre></div>
+<div class="note">補足：①〜③で意図通りにならない時は、範囲を選び直してやり直す（可逆）。3回試して直らないページは「例外」として人へ。</div>
+<p>---</p>
+<h3>D QA一次チェック（利用者→指導員の前に、自分で◯付け）</h3>
+<table><tr><th>観点</th><th>見るところ</th><th>✓/✗</th></tr><tr><td>消し残し</td><td>消すはずのゴミ・不要物が残っていないか</td><td>☐</td></tr><tr><td>描き足し</td><td>AIが勝手に絵・文字を足していないか（足っていたら不採用）</td><td>☐</td></tr><tr><td>原稿の再現</td><td>線・トーン・表情・タッチが元と変わっていないか</td><td>☐</td></tr><tr><td>切り抜き</td><td>フチがギザギザ/欠けていないか</td><td>☐</td></tr><tr><td>元データ</td><td>元ファイルが無傷で残っているか</td><td>☐</td></tr><tr><td>例外</td><td>判断に迷うページに印をつけたか</td><td>☐</td></tr></table>
+<p>✗ が1つでもあれば、直すか、印をつけて指導員へ。</p>
+<p>---</p>
+<h3>E ルール固定（このクライアント用の1枚。Aの06・07から転記）</h3>
+<ul><li>やってはいけない改変：<code><span class="todo">[要確認：NG範囲]</span></code></li><li>残すべきタッチ・トーン：<code><span class="todo">[要確認]</span></code></li><li>合格の線引き：<code><span class="todo">[要確認：合格見本]</span></code></li><li>迷ったら：直さず人へ回す（「原稿の微妙な再現」と「例外ページの処理」は人の仕事）。</li></ul>
+<p>---</p>
+<h3>F 1週間 実測シート（従来 vs AI後。数値は記入用＝勝手に埋めない）</h3>
+<div class="note">目的は2つ。①ガードレール＝品質と権利が守れているか。②増幅KPI＝同じ時間で扱える枚数が増え、工賃の幅が広がったか（人を減らす指標は置きません）。</div>
+<table><tr><th>日付</th><th>種別</th><th>枚数</th><th>従来見込(分/枚)</th><th>AI後 実所要(分/枚)</th><th>時短%</th><th>描き足し不採用 件数</th><th>例外→人 件数</th><th>指導員手戻り(分)</th><th>目視確認 済</th><th>納品GO(人)</th><th>つまずき・気づき</th></tr><tr><td>例</td><td>漫画補正</td><td><code><span class="todo">[要確認]</span></code></td><td><code><span class="todo">[要確認]</span></code></td><td><code><span class="todo">[要確認]</span></code></td><td><code><span class="todo">[要確認]</span></code></td><td><code><span class="todo">[要確認]</span></code></td><td><code><span class="todo">[要確認]</span></code></td><td><code><span class="todo">[要確認]</span></code></td><td>☐</td><td><code><span class="todo">[要確認：指導員名]</span></code></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>☐</td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>☐</td><td></td><td></td></tr></table>
+<p>増幅KPIメモ（週末に1行）：今週「1人が同じ時間で扱えた枚数」は増えたか／指導員の目視負担は減ったか（目視確認そのものは残す）。</p>
+<p>---</p>
+<h3>G 指導員の最終チェック＋差し戻し＋納品GO</h3>
+<p>最終チェック（人の責任。ここを通らないと納品しない）</p>
+<ul><li>☐ 原稿の改変がクライアントのNGに触れていない</li><li>☐ AIの描き足しが残っていない（消す/きれいにするに留まっている）</li><li>☐ 著作権：原稿・素材はクライアントの著作物。<b>加工は受託範囲内のみ／目的外利用・二次利用・学習用途・社外公開はしない</b>（<code><span class="todo">[要確認：商用利用範囲・素材権利の合意]</span></code>）</li><li>☐ 個人情報・肖像：人物が写る素材は許諾範囲内か。納品後の素材はAの05のルールどおり保管/破棄</li><li>☐ 利用ツールの規約：使う各ツールの生成物の権利・商用可否を確認（未導入ツールは導入前に規約と料金を確認）</li><li>☐ 例外ページは人が処理した</li></ul>
+<p>差し戻しテンプレ（利用者へ）</p>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_admin_4',this)">コピー</span></div><pre id="p_admin_4">ありがとうございます。○ページ目だけ、△△（消し残し/フチ）をもう一度お願いできますか。
+それ以外はとても良いです。迷ったら直さず印をつけて戻してくれて大丈夫です。</pre></div>
+<p>納品GO（最後）</p>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_admin_5',this)">コピー</span></div><pre id="p_admin_5">☐ 上の最終チェックが全部✓ → 指導員（人）がクライアントへ納品OKを出す。
+※ 利用者・AIは納品OKを出しません。送信ボタンを押すのは人です。</pre></div>
+<p>---</p>
+<h3>H 用語辞典（むずかしい言葉に短い説明）</h3>
+<ul><li><b>生成AIインペイント</b>：絵の一部を選んで、まわりとなじむように自動で埋める機能。ここでは“消す/きれいにする”用。</li><li><b>生成塗りつぶし</b>：Photoshop（導入済み）の上の機能の名前。短い言葉で指示して使う。</li><li><b>切り抜き</b>：背景を取り除いて、人物やキャラだけを残すこと。</li><li><b>可逆（かぎゃく）</b>：いつでも元に戻せること。元データを残すのがコツ。</li><li><b>目視確認（もくしかくにん）</b>：自分の目で見て確かめること。AIに任せず人が必ずやる。</li><li><b>例外ページ</b>：いつものやり方で判断できないページ。直さず人へ。</li><li><b>QA</b>：品質チェックのこと。</li></ul>
+<p>---</p>
+<h4>ツールの導入状況（混同防止）</h4>
+<ul><li><b>導入済み</b>：Photoshop（生成塗りつぶし）。※ほかに ChatGPT・Midjourney・Canva・Premiere・WordPress 等を含む計17種が導入済み。</li><li><b>例・要確認（未導入の可能性）</b>：Remove.bg → 未導入なら無料/有料・利用規約・商用可否を人が確認してから使う。Photoshopの被写体選択での切り抜きでも代替可。</li></ul>
+<div class="note">注記：このミニキットの個別の所要時間・合格基準・担当者名・クライアント名・未導入ツールの料金は、確定情報が無いため <code><span class="todo">[要確認：…]</span></code> のままにしています。埋めるのは人（指導員）。捏造して先に進めないこと。</div>
+</section>
+<section id="qa" class="qa">
+  <div class="schead"><h2>横断：指導員QAの一次チェック</h2><span class="vbadge vok">AI生成→別エージェントで検証・修正済（捏造防止・増幅・安全弁）</span></div>
+  <div class="note">位置づけ：これは1つの業務でなく、全業務に効く「横断インフラ」です。GIF-TECH&#x27;s WORKS の全業務のボトルネックは指導員のQA（品質確認）。そこをAIが一次チェックして、指導員の負担を軽くします。最終確認と責任は、これまでどおり人（指導員）が持ちます。</div>
+<h3>このキットの絶対ルール（先に読む）</h3>
+<ul><li>▸ AIは「人を減らす道具」ではありません。退屈で時間のかかる一次チェックをAIに任せ、指導員は最終確認に集中 → 受けられる件数を増やし、利用者の工賃と仕事の幅を増やすための道具です。</li><li>▸ AIは「直す」のではなく「気になる所を一覧にするだけ」。直すか・公開してよいかの最終判断（最終GO）は必ず人（指導員）。一次（AI）→最終（人）の二段構え。</li><li>▸ 分からない名前・数字・URLは、AIにも自分にも作らせない。<code><span class="todo">[要確認]</span></code> と書いて空けたまま指導員に渡す。</li><li>▸ 送信・公開・入稿・納品の「最後のボタン」は、指導員のGOが出てから押す。<code><span class="todo">[要確認]</span></code> が1つでも残っていたら出さない。</li><li>▸ 使うAI ＝ <b>ChatGPT（すでに導入済み）</b>。それ以外のAI（Claude など）は（例・要確認：未導入なら無料/有料を確認）。標準は ChatGPT 一本でかまいません。</li><li>▸ 文字づかい：専門用語は初出でやさしく補足。1ステップ短文。つまずいたら止めて指導員に聞いてOK。</li></ul>
+<p>導入のめやす：<b>2〜3人日</b>で準備できます。<b>可逆（最終は人）</b> なので、合わなければいつでも戻せます。</p>
+<p>---</p>
+<h3>A 事前準備（ここが埋まるまで始めない／指導員が埋める）</h3>
+<p>下が全部そろうまで一次チェックは始めません。ここを埋めるのが指導員の最初の仕事です。</p>
+<table><tr><th>用意するもの</th><th>中身</th></tr><tr><td>担当指導員の名前（つまずいた時の連絡先）</td><td><code><span class="todo">[要確認：担当指導員名]</span></code></td></tr><tr><td>連絡の手段（チャットのツール名など）</td><td><code><span class="todo">[要確認：連絡手段]</span></code></td></tr><tr><td>使うAI ＝ ChatGPT（導入済み）。開くURL・ログイン（共有か個別か）・使うモデル名</td><td><code><span class="todo">[要確認：ChatGPTのログイン情報]</span></code></td></tr><tr><td>（任意）Claude等それ以外のAIも使う場合のみ。導入しているか確認してから</td><td><code><span class="todo">[要確認：その他AI導入の有無（例・未導入なら無料/有料を確認）]</span></code></td></tr><tr><td>点検対象の業務（ライティング／動画／デザイン／写真／リスト入力 など、何のQAか）</td><td><code><span class="todo">[要確認：対象業務]</span></code></td></tr><tr><td>クライアント名</td><td><code><span class="todo">[要確認：クライアント名]</span></code></td></tr><tr><td>NGワード・トンマナ表（使ってはいけない言葉と、文章・成果物の雰囲気のルール）</td><td><code><span class="todo">[要確認：NG・トンマナ]</span></code></td></tr><tr><td>必須要素（成果物に必ず入れる項目・書式）</td><td><code><span class="todo">[要確認：必須要素]</span></code></td></tr><tr><td>事実の確認先（社名・数字・日付を裏取りする公式サイト・正しい表記の一覧）</td><td><code><span class="todo">[要確認：一次情報の確認先リスト]</span></code></td></tr><tr><td>医療・健康・制度の表現（薬機法など）に迷った時の確認先</td><td><code><span class="todo">[要確認：専門家/窓口の確認先]</span></code></td></tr><tr><td>使った素材の権利の確認先（音源・映像・画像・フォントの出どころ／商用利用の可否）</td><td><code><span class="todo">[要確認：素材の権利確認先]</span></code></td></tr><tr><td>従来のQA見込（AIを使わず点検していた頃の1件あたり所要分）</td><td><code><span class="todo">[要確認：従来の見込]</span></code></td></tr><tr><td>合格ライン（既定の案：指摘がすべて解消し、最終チェックを人が通過）</td><td><code><span class="todo">[要確認：合格ラインの確定]</span></code></td></tr></table>
+<p>---</p>
+<h3>B 使い方（3分で1回まわる）</h3>
+<p>01 ▸ 点検したい成果物（下書き・動画の説明・デザインのメモ など）を手元に置く。</p>
+<p>02 ▸ ChatGPT を開く <code><span class="todo">[要確認：ChatGPTのログイン情報]</span></code>。</p>
+<p>03 ▸ 下の <b>C のプロンプト</b>をコピーして貼り、<code>【 】</code> の差し込み欄を自分の言葉に置きかえる。</p>
+<p>04 ▸ AIが「気になる所の一覧」を返す。AIは直しません。あくまで候補です。</p>
+<p>05 ▸ 一覧を指導員に渡す。★ 最終確認・直す判断・公開/納品のGOは指導員（E参照）。</p>
+<div class="note">つまずき：何を貼ればいいか分からない → 担当指導員 <code><span class="todo">[要確認：担当指導員名]</span></code> に「QAの一次チェックで止まりました」と、止まったステップ番号を添えて連絡。</div>
+<p>---</p>
+<h3>C そのまま貼るプロンプト（QA一次チェック・正本／これ1本だけ）</h3>
+<div class="note">グレーの中の <code>【 】</code> は差し込み欄。<code>【 】</code> ごと消して置きかえます。（ライティングキットのQAプロンプトと同じ考え方。横断用に「権利」の観点を1つ足しています）</div>
+<div class="pblock"><div class="phead"><span class="pn">コピーして使う</span><span class="copy" onclick="cp('p_qa_1',this)">コピー</span></div><pre id="p_qa_1">あなたは、成果物を公開・納品する前にチェックする校閲アシスタントです。
+下の「対象」を読み、問題になりそうな箇所を洗い出して、指摘リストを返してください。
+あなたは文章や成果物を直しません。最終確認とOK（公開・納品してよいかの判断）は人（指導員）が行います。
+
+# 対象（チェックするもの）
+【できあがった本文、または成果物の説明をここに貼る】
+
+# この案件のルール（分かる範囲で。空欄でもよい）
+・クライアント名：【要確認：クライアント名】
+・NGワード（使ってはいけない言葉）：【要確認：NGワード】
+・トンマナ（守るべき雰囲気）：【要確認：トンマナ】
+・必須要素（必ず入れる項目・書式）：【要確認：必須要素】
+
+# 洗い出してほしいこと（6つの観点で分けて出す）
+01 誤字脱字・文法のあやしい箇所
+02 事実があやしい箇所：数字・割合・金額・日付・社名・人名・商品名・URL など、出典の確認が必要そうな所
+   （あなたが正しい答えを書くのではなく、「ここは確認が必要」と指摘するだけ）
+03 規約・コンプラのあやしい箇所：「治る・効く・必ず」などの言い切りや誇大表現、
+   実在の人が特定できそうな情報（名前・住所・連絡先・写真・くわしすぎる事例）
+04 NG・トンマナ違反：NGワードの使用、雰囲気が合っていない箇所
+05 権利のあやしい箇所：使った素材（音源・映像・画像・フォント）の出どころや、商用利用の可否が確認できない所
+06 [要確認] の埋め残し：本文に残っている [要確認] や、確認すべきなのに印が付いていない箇所
+
+# ルール
+・社名・人名・数字・URL・日付は、私が渡したメモ以外、絶対に作らない。分からなければ「不明」と書く。
+・[要確認] は消したり埋めたりしない。残っている事実として報告する。
+
+# 出力の形
+・観点ごとに番号付きの表で出す：| 番号 | 種類(01-06) | 場所(見出しや書き出しの言葉) | 気になる点 | 直す候補/メモ |
+・問題が見つからない観点は「指摘なし」と書く。
+・最後に「これは一次チェックです。公開・納品の可否は指導員が判断してください」と1行添える。</pre></div>
+<div class="note">コツ：AIの指摘は「候補」。指摘ゼロでも安心しない。事実・固有名詞・数字・権利は必ず人が一次情報と照らす。動かない時は対象を半分ずつ2回に分けて貼る。</div>
+<p>---</p>
+<h3>D ルールを1回で固定する方法（ChatGPT・指導員用）</h3>
+<p>毎回プロンプトに書くのは大変なので、ルールを1回だけ登録します。1回だけ半日〜1日の準備で、あとは使い回せます。</p>
+<p>01 ▸ ChatGPT の画面を開く。左下の自分の名前（アカウント）を押す。</p>
+<p>02 ▸ メニューの「カスタム指示」（英語だと Customize ChatGPT）を押す。</p>
+<p>03 ▸ 「ChatGPTにどのように応答してほしいか」の欄に、A で埋めた NG・トンマナ・必須要素＋共通ルール（固有名詞は作らない／断定できない数字は書かない／<span class="todo">[要確認]</span>は残す／言い切り禁止／最後のGOは人）を貼る。</p>
+<p>04 ▸ 「保存」を押す。</p>
+<p>05 ▸ 以降は、C のプロンプトを貼るだけで毎回このルールが効く。</p>
+<div class="note">クライアントが増えたら、クライアントごとに専用のGPT（マイGPT）を分けるとルールが混ざりません。<br>（任意）Claude等それ以外のAIを使う場合は、導入の有無を確認してから <code><span class="todo">[要確認：その他AI導入の有無（例・未導入なら無料/有料を確認）]</span></code>。標準は ChatGPT 一本でかまいません。<br>✓ どのAIでも、入稿・送信・公開・納品の最後のGOは必ず人（指導員）が出します。これは変わりません。</div>
+<p>---</p>
+<h3>E 一次 → 最終の二段構え（最終GOは人）★</h3>
+<ul><li>▸ 一次チェック（AI＋利用者/指導員）：C のプロンプトで「気になる所の一覧」を作る。時間がない時は一次チェックを飛ばしてOK。</li><li>▸ 最終チェック（指導員）：一覧を見て、事実・固有名詞・数字・権利を一次情報で確かめ、直す/差し戻すを判断。<b>ここは省略できません。</b></li><li>▸ 最終GO：送信・公開・入稿・納品の最後のボタンは、指導員のGOが出てから（事業所の方針で指導員が押すと決めた場合はそれに従う）。</li><li>▸ ★ <code><span class="todo">[要確認]</span></code> が1つでも残っていたら、公開・納品しない。「<span class="todo">[要確認]</span>が残っています」と指導員に伝える。差し戻されたら一次チェックからやり直す。</li></ul>
+<p>---</p>
+<h3>F つまずき対処</h3>
+<table><tr><th>こうなったら</th><th>こうする</th></tr><tr><td>ChatGPTのログインが分からない</td><td><code><span class="todo">[要確認：ChatGPTのログイン情報]</span></code> を担当指導員に聞く。自分で新規登録しない</td></tr><tr><td>AIが勝手に直してきた</td><td>「直さず、気になる所を一覧にするだけにして」ともう一度頼む</td></tr><tr><td>観点が多くて疲れた</td><td>一次チェックは飛ばしてOK。ただし指導員の最終チェック（E）は省略しない</td></tr><tr><td>数字・社名・権利が正しいか分からない</td><td>自分で決めない。<code><span class="todo">[要確認]</span></code> のまま残して指導員に渡す</td></tr><tr><td>AIが固有名詞や数字を勝手に補った</td><td>その箇所を消し、<code><span class="todo">[要確認]</span></code> に戻して指導員に報告</td></tr></table>
+<p>困ったときの連絡先：担当指導員 <code><span class="todo">[要確認：担当指導員名]</span></code>（<code><span class="todo">[要確認：連絡手段]</span></code>）。止まったステップ番号を添えて送ってください。</p>
+<p>---</p>
+<h3>G 1週間の実測（増幅KPI／本格導入の前に必ず）</h3>
+<p>「人を減らせたか」ではなく「指導員の負担が軽くなり、受けられる件数が増えたか」を見ます。</p>
+<ul><li>☐ 1件あたりの指導員QA時間（従来 <code><span class="todo">[要確認：従来の見込]</span></code> → AI一次チェック後）</li><li>☐ 1週間でQAできた件数（増えたか）</li><li>☐ AIの一次チェックが拾った指摘の数 ／ 指導員が最終で追加で見つけた数</li><li>☐ 利用者・指導員のつまずき（自由記入）</li></ul>
+<div class="note">★ 注意：時短は人員削減のためではありません。指導員が最終確認に集中し、利用者が安心して件数をこなせるようにして、一人あたりの工賃と仕事の幅を増やすためのものです。</div>
+<p>---</p>
+<h3>H 用語（初めての人向け）</h3>
+<ul><li>QA … 品質確認（Quality Assurance）。成果物を出す前のチェックのこと。</li><li>一次チェック … 最初のざっとした点検。ここをAIが手伝う。最終確認は人。</li><li>トンマナ … トーン＆マナー。文章・成果物の雰囲気や言葉づかいのルール。</li><li>入稿 … WordPress など、公開する場所に下書きとして登録すること。</li><li><code><span class="todo">[要確認]</span></code> … 「ここはまだ確かめていない」という印。消さずに残し、指導員が確認する。</li></ul>
+<p>---</p>
+<div class="note">出典・整合：このミニキットは確定データ（ボトルネック＝指導員QA／AIが一次・人が最終／推奨ツール＝ChatGPT 導入済み／工数2〜3人日・可逆）に基づき、ライティングパイロットキットの「QA一次チェックプロンプト（セクションD）」と整合させた横断版です。固有名詞・数値・URL・クライアント名は確定データにある範囲のみ記載し、それ以外は <code><span class="todo">[要確認：…]</span></code> としています。</div>
+</section>
+
+  <div class="foot">
+    <h4>このハンドブックについて</h4>
+    <p>GIF-TECH's WORKS は就労継続支援B型事業所です。本書はAIで人を減らすためではなく、一人ひとりの工賃と仕事の幅を増やし、指導員のチェック負担を軽くするための設計です。送信・公開・入稿・納品の最終GOは必ず人が行います。事実・固有名詞・数字は確認できたものだけを使い、未確認は <span class="todo">[要確認]</span> で空けています。</p>
+    <p>作成：RYOSEIWORLD合同会社 ／ 2026-06-15 ／ 元データ：本プロジェクトの業務棚卸し（サイト全クロール26実績・BPO自動化リサーチ）。各業務キットは生成AIで作成後、捏造・B型理念・安全弁の3観点を別エージェントで検証。<b>外部（先方）への提示・送付は本人GO必須。</b></p>
+  </div>
+</div>
+<script>
+function cp(id, btn){
+  var el=document.getElementById(id); var text=el?el.textContent:'';
+  function ok(){var o=btn.textContent;btn.textContent='コピーしました';btn.classList.add('done');
+    setTimeout(function(){btn.textContent=o;btn.classList.remove('done');},1600);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(ok,function(){fb(text,ok);});}else{fb(text,ok);}
+}
+function fb(text,ok){var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){alert('コピーできませんでした');}document.body.removeChild(ta);}
+</script>
+</body>
+</html>

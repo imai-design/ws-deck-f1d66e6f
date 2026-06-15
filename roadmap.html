@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GIF-TECH's WORKS｜業務棚卸し × AI自動化ロードマップ</title>
+<style>
+  :root{
+    --ink:#16181d; --sub:#6b7280; --line:#e6e8ee; --bg:#f7f8fa; --card:#fff;
+    --accent:#3b5bdb; --accent2:#0ca678; --warn:#e8590c; --soft:#eef1f8;
+    --hi:#0ca678; --mid:#f59f00; --lo:#adb5bd;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,-apple-system,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:0 auto;padding:0 22px}
+  /* header */
+  header.hero{background:linear-gradient(135deg,#1a1c2e 0%,#23264a 60%,#2b2f55 100%);color:#fff;padding:54px 0 46px}
+  .hero .wrap{max-width:980px}
+  .eyebrow{font-size:12.5px;letter-spacing:.18em;color:#aeb4e0;font-weight:600;text-transform:uppercase}
+  h1{font-size:30px;line-height:1.35;margin:12px 0 6px;font-weight:800;letter-spacing:.01em}
+  .hero .lead{color:#c9cde6;font-size:15px;max-width:760px;margin-top:10px}
+  .meta{margin-top:20px;font-size:12.5px;color:#9aa0cc;display:flex;gap:18px;flex-wrap:wrap}
+  /* stat strip */
+  .stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:26px}
+  .stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 10px;text-align:center}
+  .stat b{display:block;font-size:21px;font-weight:800;color:#fff}
+  .stat span{font-size:11px;color:#aeb4e0}
+  @media(max-width:760px){.stats{grid-template-columns:repeat(3,1fr)}}
+  /* sections */
+  section{padding:40px 0;border-bottom:1px solid var(--line)}
+  .sec-no{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.1em}
+  h2{font-size:22px;font-weight:800;margin:6px 0 16px;letter-spacing:.01em}
+  h3{font-size:16px;font-weight:700;margin:22px 0 10px}
+  p{margin:10px 0;color:#33363d}
+  .muted{color:var(--sub);font-size:13.5px}
+  /* thesis box */
+  .thesis{background:linear-gradient(180deg,#f3f7f5,#eef6f2);border:1px solid #cfe9df;border-left:4px solid var(--accent2);
+    border-radius:12px;padding:18px 20px;margin:14px 0}
+  .thesis h3{margin-top:0;color:#0b7a5b}
+  .callout{background:#fff7ed;border:1px solid #ffe0c2;border-left:4px solid var(--warn);border-radius:10px;padding:14px 16px;margin:14px 0;font-size:14px}
+  .keypoints{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:14px}
+  @media(max-width:760px){.keypoints{grid-template-columns:1fr}}
+  .kp{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .kp b{color:var(--accent)}
+  /* tables */
+  .tbl{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .tbl th{background:#f1f3f9;text-align:left;padding:10px 11px;font-weight:700;font-size:12px;color:#3a3f4b;border-bottom:1px solid var(--line)}
+  .tbl td{padding:10px 11px;border-bottom:1px solid #f0f1f5;vertical-align:top}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl tr:hover td{background:#fafbff}
+  .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  /* badges */
+  .b{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;line-height:1.6}
+  .b-hi{background:#e3f7ef;color:#0b7a5b}
+  .b-mid{background:#fff3e0;color:#b25a06}
+  .b-lo{background:#eef0f3;color:#6b7280}
+  .b-cat{background:var(--soft);color:var(--accent)}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
+  /* quadrant */
+  .quad-wrap{position:relative;margin:22px 0 8px}
+  .quad{position:relative;height:440px;background:
+    linear-gradient(0deg,rgba(59,91,219,.04),rgba(12,166,120,.05));
+    border:1px solid var(--line);border-radius:14px}
+  .quad .axis-x{position:absolute;left:0;right:0;bottom:-26px;text-align:center;font-size:11.5px;color:var(--sub)}
+  .quad .axis-y{position:absolute;top:50%;left:-30px;transform:rotate(-90deg);transform-origin:left;font-size:11.5px;color:var(--sub);white-space:nowrap}
+  .quad .vline{position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed #cfd4e0}
+  .quad .hline{position:absolute;top:50%;left:0;right:0;border-top:1px dashed #cfd4e0}
+  .ql{position:absolute;font-size:10.5px;color:#9aa0b3;font-weight:600;letter-spacing:.04em}
+  .pt{position:absolute;transform:translate(-50%,-50%);text-align:center;cursor:default}
+  .pt .pin{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px;margin:0 auto;box-shadow:0 3px 8px rgba(20,24,40,.18)}
+  .pt small{display:block;font-size:10.5px;margin-top:3px;color:#3a3f4b;font-weight:600;white-space:nowrap;background:rgba(255,255,255,.7);border-radius:4px;padding:0 3px}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;margin-top:34px;color:var(--sub)}
+  /* phases */
+  .phase{display:grid;grid-template-columns:120px 1fr;gap:16px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:16px 18px;margin:12px 0}
+  .phase .ph{font-weight:800;color:var(--accent)}
+  .phase .ph small{display:block;color:var(--sub);font-weight:600;font-size:11px;margin-top:3px}
+  @media(max-width:680px){.phase{grid-template-columns:1fr}}
+  ul.clean{margin:8px 0 8px 2px;list-style:none}
+  ul.clean li{padding:4px 0 4px 20px;position:relative;font-size:14px}
+  ul.clean li:before{content:"";position:absolute;left:0;top:12px;width:7px;height:7px;border-radius:2px;background:var(--accent)}
+  /* sample cards */
+  .samples{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:8px}
+  @media(max-width:760px){.samples{grid-template-columns:1fr}}
+  .sample{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column}
+  .sample .tag{font-size:11px;font-weight:700;color:var(--accent2);letter-spacing:.06em}
+  .sample h4{font-size:15px;margin:6px 0 8px}
+  .sample p{font-size:13px;color:#444;margin:4px 0}
+  .sample .file{margin-top:auto;font-size:11.5px;color:var(--sub);font-family:ui-monospace,Menlo,monospace;background:#f5f6fa;border-radius:6px;padding:6px 8px;word-break:break-all}
+  .excerpt{background:#0f1117;color:#d7dbe6;border-radius:10px;padding:12px 14px;font-size:12px;line-height:1.7;white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;margin:10px 0;max-height:220px;overflow:auto}
+  /* next action */
+  .next{background:linear-gradient(135deg,#1a1c2e,#2b2f55);color:#fff;border-radius:16px;padding:26px}
+  .next h2{color:#fff;margin-top:0}
+  .next .step{display:flex;gap:12px;align-items:flex-start;margin:10px 0}
+  .next .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent2);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .next .step div{color:#d3d7ea;font-size:14px}
+  footer{padding:30px 0 60px;color:var(--sub);font-size:12px;text-align:center}
+  a{color:var(--accent);text-decoration:none}
+  .pillrow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+  .pill{font-size:11.5px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:3px 11px;color:#444}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">業務棚卸し × AI自動化 ロードマップ</div>
+    <h1>GIF-TECH's WORKS の全業務を棚卸しし、<br>AIで「増幅」できる所を洗い出す</h1>
+    <p class="lead">就労継続支援B型事業所「GIF-TECH's」が提供する8業務・26実績を分解し、どの工程をAIに任せられるか、工数と優先順位つきで整理しました。狙いは人員削減ではなく、<b style="color:#fff">一人ひとりの工賃と仕事の幅を増やし、指導員のチェック負担を軽くすること</b>です。</p>
+    <div class="meta">
+      <span>対象：https://gif-techs.works.wellstech.jp/</span>
+      <span>作成：2026-06-15</span>
+      <span>区分：社内検討用ドラフト</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>約60</b><span>働く利用者</span></div>
+      <div class="stat"><b>7</b><span>指導員</span></div>
+      <div class="stat"><b>8</b><span>業務カテゴリ</span></div>
+      <div class="stat"><b>26</b><span>公開実績</span></div>
+      <div class="stat"><b>2</b><span>事業所(板橋)</span></div>
+      <div class="stat"><b>17</b><span>使用ツール</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- 0. 結論 -->
+<section>
+  <div class="sec-no">SUMMARY</div>
+  <h2>結論：3つだけ先に言います</h2>
+  <div class="keypoints">
+    <div class="kp"><b>01　すでに土台はある</b><p class="muted">GIF-TECHは既に ChatGPT・Midjourney・Canva を業務に導入済み。ゼロからではなく「個人技を、誰でも同じ品質が出る手順に固定する」段階。</p></div>
+    <div class="kp"><b>02　最初の一手は3業務</b><p class="muted">動画の前工程・ライティング初稿・営業リスト/文面。いずれも実績量が多く、導入が軽く、ミスしても取り返せる（送信や公開は人がGO）。</p></div>
+    <div class="kp"><b>03　目的は工賃を上げること</b><p class="muted">B型事業所なので「AIで人を置き換える」のは逆。AIで前工程を巻き取り、利用者は付加価値の高い仕事へ、工賃も上げる。</p></div>
+  </div>
+  <div class="thesis">
+    <h3>いちばん大事な視点：これは「効率化」ではなく「増幅」の設計</h3>
+    <p style="margin-bottom:0">GIF-TECH's WORKS は <b>就労継続支援B型事業所</b>。約60名の障がいのある方が働き、受け取った額のほぼ全額が利用者の工賃になる仕組みです。だから「AIで作業を消す＝仕事を奪う」では理念（テクノロジーのチカラで障がい福祉のいままでを変える）に反します。正しい設計は、<b>退屈で時間のかかる前工程（文字起こし・下書き・収集）をAIに任せ、利用者は「判断・仕上げ・量産」に集中して、一人あたりの生産量と工賃を増やす</b>こと。指導員7名のQA負担も軽くなり、もっと多くの案件を受けられます。</p>
+  </div>
+</section>
+
+<!-- 1. 全業務棚卸し -->
+<section>
+  <div class="sec-no">01 / INVENTORY</div>
+  <h2>全業務の棚卸しマップ（8カテゴリ）</h2>
+  <p class="muted">サイト掲載の実績件数・公開単価とともに整理。動画とデザインが二大柱、ライティング・SNS・リストが量で稼ぐ領域。</p>
+  <table class="tbl">
+    <thead><tr><th>業務カテゴリ</th><th>主な中身</th><th class="num">実績</th><th>公開単価（税込）</th><th>代表クライアント</th></tr></thead>
+    <tbody>
+      <tr><td><b>動画編集</b></td><td>YouTube本編/ショート、対談、ゲーム実況、ゆっくり、紙芝居アニメ、実写。チャンネル運営・LIVE・公式LINEまで</td><td class="num">20</td><td class="num">1本 ¥5,500〜11,000</td><td>村上様（魔界の税理士／月¥10万・月12本+LIVE+LINE）、高瀬様（月8本）、板橋区（¥715,000 啓発映像）</td></tr>
+      <tr><td><b>デザイン制作</b></td><td>サムネ、図解、チラシ、イラスト、カオスマップ、Live2D</td><td class="num">10</td><td class="num">サムネ¥1,650〜／図解¥1,650〜5,500／チラシ¥5,500〜11,000</td><td>村上様（サムネ週3）、GMO TECH様（カオスマップ）</td></tr>
+      <tr><td><b>ライティング</b></td><td>ブログ作成・リライト、まとめ記事、ゲーム解説、SEO記事</td><td class="num">9</td><td class="num">¥1〜3/字／記事 ¥550〜5,500</td><td>LIFRELL様（リライト週10〜20）、在宅医療メディア</td></tr>
+      <tr><td><b>写真撮影</b></td><td>料理撮影、Web用撮影、ダイジェスト撮影、現地撮影</td><td class="num">5</td><td class="num">¥3,300〜5,500</td><td>飲食/食品（@etablefoods 等）</td></tr>
+      <tr><td><b>WEB制作</b></td><td>HP・LP・サービスサイト、保守運用、要件定義/ディレクション</td><td class="num">5</td><td class="num">HP ¥33〜66万／LP ¥11〜66万／保守 ¥1.1〜3.3万/月</td><td>各社（porepore2022.com 等）</td></tr>
+      <tr><td><b>SNS運用</b></td><td>Instagramフィード/ストーリー/リール、エンゲージ促進</td><td class="num">4</td><td class="num">1投稿 ¥1,100〜3,300</td><td>LFU様（@ripple_nurse・週2）</td></tr>
+      <tr><td><b>リスト入力</b></td><td>営業リスト作成＋フォーム営業送信、リサーチ、転記（6パターン）</td><td class="num">4</td><td class="num">1リスト ¥10〜</td><td>エイチリンク様、インディバース様（SEO/被リンク営業）</td></tr>
+      <tr><td><b>その他事務</b></td><td>梱包（ポケカ等）、素材切り抜き、画像補正（漫画のゴミ消し 月200P）</td><td class="num">3</td><td class="num">梱包¥110／切り抜き¥220／画像補正¥5.5/枚</td><td>非公開（漫画補正 月200ページ）</td></tr>
+    </tbody>
+  </table>
+  <h3>納品ワークフローと、品質を支える仕組み</h3>
+  <p class="muted">問い合わせ→ヒアリング/要件定義→無料見積（テスト発注可）→着手→<b>指導員によるQAチェック</b>→初稿→修正→納品。品質の肝は「ディレクター（指導員）が中間に入り、利用者と二人三脚＋指導員のチェック」。＝<b>このQAチェックが全業務のボトルネック</b>であり、AI導入の最大の効き所でもある。</p>
+  <div class="pillrow">
+    <span class="pill">連絡：Chatwork / Slack / LINE / Messenger / Discord / Google Chat</span>
+  </div>
+  <div class="pillrow">
+    <span class="pill">既に使用中のAI：ChatGPT（API取得まで可）</span><span class="pill">Midjourney</span><span class="pill">Canva</span><span class="pill">Premiere / Photoshop / WordPress ほか17種</span>
+  </div>
+</section>
+
+<!-- 2. AI診断 -->
+<section>
+  <div class="sec-no">02 / DIAGNOSIS</div>
+  <h2>AI自動化の診断表</h2>
+  <p class="muted">業界の実務水準（2026年）とGIF-TECHの実作業を突き合わせ、各業務の「効きやすさ」「AIに任せる工程」「使うツール」「人が必ず残す仕事」を判定。<span class="b b-hi">高</span>＝今すぐ効く／<span class="b b-mid">中</span>＝半自動が現実解／<span class="b b-lo">条件付</span>＝対象限定または要検証。</p>
+  <table class="tbl">
+    <thead><tr><th>業務</th><th>効き</th><th>AIに任せられる工程</th><th>使うツール（例）</th><th>人が必ず残す仕事</th></tr></thead>
+    <tbody>
+      <tr><td><b>動画編集</b></td><td><span class="b b-hi">高</span></td><td>文字起こし／無音・フィラー自動カット／字幕生成／長尺→ショート抽出／サムネ案・素材生成</td><td>Vrew・Whisper・CapCut・Opus Clip・Canva</td><td>テンポと構成の判断、固有名詞校正、権利確認、最終書き出し</td></tr>
+      <tr><td><b>ライティング</b></td><td><span class="b b-hi">高</span></td><td>改善点診断／構成案／初稿（セクション単位）／SEO最適化の下案</td><td>Claude・ChatGPT（既存）・Perplexity</td><td>一次情報・独自体験、事実/数字の検証、トンマナ最終編集</td></tr>
+      <tr><td><b>リスト入力／営業</b></td><td><span class="b b-hi">高</span></td><td>企業・問い合わせ先の収集／ICP採点／差し込み営業文の生成／名寄せ補助</td><td>Claude＋スクレイピング・Clay/Apollo（任意）</td><td>規約/法務適合、重複チェック、<b>送信のGO（人が押す）</b></td></tr>
+      <tr><td><b>SNS運用</b></td><td><span class="b b-mid">中〜高</span></td><td>テーマ出し／投稿カレンダー／キャプション・ハッシュタグ／分析</td><td>Claude・Canva・Buffer（任意）</td><td>最終投稿GO、炎上/コンプラ判断、コメント一次対応</td></tr>
+      <tr><td><b>デザイン制作</b></td><td><span class="b b-mid">中〜高</span></td><td>ラフ/コンセプト案、素材生成・背景除去、バリエ展開、媒体別リサイズ、図解の下書き</td><td>Canva（既存）・Firefly・Midjourney（既存）・Recraft</td><td>ブランド適合と美的判断、可読性、商用権確認、最終調整</td></tr>
+      <tr><td><b>WEB制作</b></td><td><span class="b b-mid">中〜高</span></td><td>LP/モックの叩き台、コンポーネント生成、コピー、画像最適化</td><td>v0・Framer・Lovable・Claude</td><td>情報設計、コードレビュー/セキュリティ、本番デプロイ責任</td></tr>
+      <tr><td><b>その他事務（画像補正）</b></td><td><span class="b b-lo">条件付</span></td><td>漫画のゴミ消し・不要物除去（生成AIインペイント）／切り抜き自動化</td><td>Photoshop生成塗りつぶし・Remove.bg</td><td>仕上がりの目視確認、原稿の微妙な再現、例外処理</td></tr>
+      <tr><td><b>写真撮影</b></td><td><span class="b b-lo">撮影は不可</span></td><td>（撮影後）セレクト自動化・バッチ現像・レタッチ・ノイズ除去</td><td>Lightroom・Aftershoot・Topaz</td><td>撮影そのもの（物理）、審美の最終判断</td></tr>
+      <tr><td><b>横断：指導員QA</b></td><td><span class="b b-hi">高</span></td><td>誤字脱字・事実・規約・トンマナの一次チェック（人の最終確認の前段）</td><td>Claude（チェック用プロンプト）</td><td>最終承認・責任判断（一次→最終の二段構え）</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><b>注記：</b>表中のツール名・効きやすさは2026年6月時点の実務記事と実証値に基づく総合判断です。実際の精度は素材の品質・言語・固有名詞で変動するため、<b>本格導入の前に必ず自社サンプルで1週間の試運転（パイロット）をして実測</b>してください。</div>
+</section>
+
+<!-- 3. 優先順位 -->
+<section>
+  <div class="sec-no">03 / PRIORITY</div>
+  <h2>優先順位マトリクス（インパクト × 着手しやすさ）</h2>
+  <p class="muted">縦軸＝インパクト（時短幅 × 案件量 × 工賃貢献）、横軸＝着手しやすさ（導入の軽さ × 利用者が操作できるか × 失敗しても取り返せるか）。右上＝今すぐ着手すべき。</p>
+
+  <div class="quad-wrap">
+    <div class="quad">
+      <div class="vline"></div><div class="hline"></div>
+      <div class="ql" style="top:8px;left:12px">インパクト高 / 着手やや重い</div>
+      <div class="ql" style="top:8px;right:12px;text-align:right">最優先（高インパクト・着手容易）</div>
+      <div class="ql" style="bottom:8px;left:12px">後回し</div>
+      <div class="ql" style="bottom:8px;right:12px;text-align:right">スキマ時間で</div>
+
+      <!-- 右上：最優先 -->
+      <div class="pt" style="left:78%;top:20%"><div class="pin" style="background:#0ca678">1</div><small>動画 前工程</small></div>
+      <div class="pt" style="left:88%;top:33%"><div class="pin" style="background:#0ca678">2</div><small>ライティング初稿</small></div>
+      <div class="pt" style="left:72%;top:38%"><div class="pin" style="background:#0ca678">3</div><small>リスト/営業文</small></div>
+      <div class="pt" style="left:85%;top:62%"><div class="pin" style="background:#f59f00">4</div><small>SNS文案</small></div>
+      <div class="pt" style="left:70%;top:70%"><div class="pin" style="background:#f59f00">5</div><small>サムネ/図解量産</small></div>
+      <!-- 左上：高インパクト重い -->
+      <div class="pt" style="left:30%;top:28%"><div class="pin" style="background:#3b5bdb">8</div><small>QA一次チェック</small></div>
+      <div class="pt" style="left:22%;top:44%"><div class="pin" style="background:#e8590c">6</div><small>画像補正 半自動</small></div>
+      <!-- 左下/中：重い・限定 -->
+      <div class="pt" style="left:34%;top:66%"><div class="pin" style="background:#adb5bd">7</div><small>WEB叩き台</small></div>
+
+      <div class="axis-x">着手しやすさ　→　高い</div>
+      <div class="axis-y">インパクト　→　大きい</div>
+    </div>
+  </div>
+  <div class="legend">
+    <span><span class="dot" style="background:#0ca678"></span>最優先（今月）</span>
+    <span><span class="dot" style="background:#f59f00"></span>次点（横展開）</span>
+    <span><span class="dot" style="background:#3b5bdb"></span>横断インフラ</span>
+    <span><span class="dot" style="background:#e8590c"></span>要検証</span>
+  </div>
+
+  <h3>工数つき一覧（概算）</h3>
+  <table class="tbl">
+    <thead><tr><th>#</th><th>施策</th><th>導入工数</th><th>運用時の時短</th><th>取り返し</th><th>狙う効果</th></tr></thead>
+    <tbody>
+      <tr><td><span class="b b-hi">1</span></td><td><b>動画の前工程自動化</b>（文字起こし→字幕→ショート抽出）</td><td class="num">1〜2人日</td><td class="num">30〜50%/本</td><td>可逆</td><td>最大カテゴリ。村上様/高瀬様の月数十本を増産、新規も受けやすく</td></tr>
+      <tr><td><span class="b b-hi">2</span></td><td><b>ライティング初稿のパイプライン化</b>（診断→構成→初稿）</td><td class="num">約1人日</td><td class="num">60〜70%</td><td>可逆</td><td>既にChatGPT使用中(#478)。週10〜20投稿の量を底上げ</td></tr>
+      <tr><td><span class="b b-hi">3</span></td><td><b>営業リスト＋フォーム営業文の半自動化</b></td><td class="num">2〜3人日</td><td class="num">70〜80%</td><td>可逆（送信は人）</td><td>継続2社の定型業務。退屈な収集を消し、量を伸ばす</td></tr>
+      <tr><td><span class="b b-mid">4</span></td><td><b>SNS投稿のカレンダー＋文案＋ハッシュタグ</b></td><td class="num">約1人日</td><td class="num">約50%</td><td>可逆（投稿は人）</td><td>LFU様継続。半自動で月次運用を安定化</td></tr>
+      <tr><td><span class="b b-mid">5</span></td><td><b>サムネ/図解/カオスマップのバリエ量産</b></td><td class="num">1〜2人日</td><td class="num">40〜60%</td><td>可逆</td><td>Canva/Midjourney(既存)で1案→複数展開を高速化</td></tr>
+      <tr><td><span class="b b-lo">6</span></td><td><b>漫画の画像補正（ゴミ消し）の半自動化</b></td><td class="num">3〜5人日<br><span class="muted">(検証込)</span></td><td class="num">50〜70%</td><td>可逆</td><td>月200ページの定型。生成塗りつぶしで省力化（要品質検証）</td></tr>
+      <tr><td><span class="b b-lo">7</span></td><td><b>WEB制作の叩き台生成</b>（LP/モック）</td><td class="num">2〜3人日</td><td class="num">叩き台80%</td><td>可逆</td><td>初稿は秒。仕上げ・本番は人。単価高だが件数少</td></tr>
+      <tr><td><span class="b" style="background:#e7ecff;color:#3b5bdb">8</span></td><td><b>指導員QAの一次チェック自動化</b>（横断）</td><td class="num">2〜3人日</td><td class="num">QA負担減</td><td>可逆（最終は人）</td><td>全業務のボトルネックを直撃。指導員が"最終確認"に集中でき、処理件数が増える</td></tr>
+    </tbody>
+  </table>
+  <p class="muted">※工数・時短は概算。1週間のパイロットで実測して補正する前提です。</p>
+</section>
+
+<!-- 4. ロードマップ -->
+<section>
+  <div class="sec-no">04 / ROADMAP</div>
+  <h2>3フェーズのロードマップ</h2>
+  <div class="phase">
+    <div class="ph">Phase 1<small>今月／すぐ効く</small></div>
+    <div>
+      <ul class="clean">
+        <li><b>動画の前工程・ライティング初稿・営業リスト/文面</b>の3つを、テンプレ＋手順書として固定（＝本資料のサンプルA/B/Cがそのまま雛形）</li>
+        <li>導入が軽く・可逆（送信や公開は人がGO）なので、まず1業務×1クライアントで試運転 → 実測 → 横展開</li>
+        <li>担当する利用者2〜3名に手順を渡し、指導員が伴走</li>
+      </ul>
+    </div>
+  </div>
+  <div class="phase">
+    <div class="ph">Phase 2<small>来月／横展開</small></div>
+    <div>
+      <ul class="clean">
+        <li>SNS文案・サムネ/図解のバリエ量産を追加</li>
+        <li><b>指導員QAの一次チェック</b>をAI化（誤字・事実・規約）。指導員は最終確認に集中 → 受注可能件数を増やす</li>
+        <li>クライアント別の「文体・NG・トンマナ」をClaude Projectsで資産化</li>
+      </ul>
+    </div>
+  </div>
+  <div class="phase">
+    <div class="ph">Phase 3<small>仕組み化・教材化</small></div>
+    <div>
+      <ul class="clean">
+        <li>画像補正・WEB叩き台など要検証ものを実装</li>
+        <li><b>「利用者向けAI活用カリキュラム」</b>として整備（既存の勉強会/Udemy運用に組込）。利用者のスキルと工賃を底上げ</li>
+        <li>このモデルを<b>B型事業所のAI活用事例</b>として外部発信・横展開（理念「障がい福祉のいままでを変える」の実証）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 5. サンプル -->
+<section>
+  <div class="sec-no">05 / SAMPLES</div>
+  <h2>実サンプル成果物（実際に作りました）</h2>
+  <p class="muted">「同じような出力を出せるか」を確かめるため、GIF-TECHが実際に繰り返し受注している3業務で、AIが作った実物を用意しました。全文は同フォルダの各ファイルに格納。</p>
+  <div class="samples">
+    <div class="sample">
+      <div class="tag">SAMPLE A ／ ライティング</div>
+      <h4>ブログリライトのAIパイプライン</h4>
+      <p>実績#478（LIFRELL様）対応。診断→構成→初稿を3プロンプトで固定。1記事 約2〜3h → 仕上げ込み40〜60分。</p>
+      <div class="file">サンプル成果物/A_ブログリライト_AIパイプライン.md</div>
+    </div>
+    <div class="sample">
+      <div class="tag">SAMPLE B ／ SNS運用</div>
+      <h4>Instagram 1ヶ月運用パッケージ</h4>
+      <p>実績#481（LFU様）対応。1ヶ月カレンダー＋キャプション実物3本＋ハッシュタグ。投稿GOは人。</p>
+      <div class="file">サンプル成果物/B_Instagram_1ヶ月運用パッケージ.md</div>
+    </div>
+    <div class="sample">
+      <div class="tag">SAMPLE C ／ リスト・営業</div>
+      <h4>営業リスト＋フォーム営業文</h4>
+      <p>実績#475・クライアントの声対応。カラム設計＋ICP採点＋業種別営業文2本。送信は人が1社ずつGO。</p>
+      <div class="file">サンプル成果物/C_営業リスト_フォーム営業文_半自動化.md</div>
+    </div>
+  </div>
+  <h3>抜粋：サンプルB のキャプション実物（看護師向けアカウント・サンプル）</h3>
+  <div class="excerpt">夜勤明け、寝たいのに眠れない人へ。
+
+体内時計をリセットする5つのコツ（保存推奨）
+
+1｜帰宅中はサングラス。朝日を浴びすぎない
+2｜帰ったらまず温かいシャワー（熱すぎない）
+3｜寝室は「真っ暗・涼しい・静か」の3点セット
+4｜カフェインは勤務後半で止める
+5｜起きたら散歩。次の夜勤に向けてリズムを戻す
+
+完璧じゃなくてOK。1つできたら自分を褒めてあげてください。</div>
+</section>
+
+<!-- 6. 次の一手 -->
+<section style="border-bottom:none">
+  <div class="sec-no">06 / NEXT</div>
+  <div class="next">
+    <h2>最初の一手（今週やること）</h2>
+    <div class="step"><div class="n">1</div><div><b>1業務 × 1クライアントを選ぶ。</b>おすすめは「ライティング初稿（LIFRELL様）」— 既にChatGPT導入済みで最も軽く始められる。</div></div>
+    <div class="step"><div class="n">2</div><div><b>サンプルAの3プロンプトをClaude/ChatGPTに登録し、1週間試運転。</b>従来の所要時間と比べて実測する。</div></div>
+    <div class="step"><div class="n">3</div><div><b>担当利用者＋指導員で振り返り。</b>「どこが楽になったか／どこは人が必要か」を1枚にまとめ、次の業務へ横展開。</div></div>
+    <div class="step"><div class="n">4</div><div><b>守ること：</b>送信・公開・入稿の最終GOは必ず人。事実と固有名詞は人が確認。個人情報・規約・B型の制度要件は人の責任。</div></div>
+  </div>
+</section>
+
+<footer>
+  GIF-TECH's WORKS 業務棚卸し × AI自動化ロードマップ ／ 2026-06-15 作成（社内検討用ドラフト）<br>
+  本資料の数値・効きやすさは2026年6月時点の公開情報と実務水準に基づく概算であり、導入前のパイロット実測を前提とします。
+</footer>
+
+</div>
+</body>
+</html>
